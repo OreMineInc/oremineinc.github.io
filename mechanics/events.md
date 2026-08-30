@@ -34,6 +34,8 @@ section: mechanics
 
 - Ограничения: В зоне проведения ивента полностью запрещено ломать и ставить блоки, а также создавать регионы.
 
+<div class="action-links"><a class="primary-button" href="https://docs.google.com/spreadsheets/d/1WD_oep364OGmpuVckghYHBeS9CYSyRX95I3VUz2y1l8/edit?usp=sharing" target="_blank" rel="noopener noreferrer">Таблица предметов и шансов <span>↗</span></a></div>
+
 ### Столбы
 
 - Описание: Арена на выживание, где снизу стремительно поднимается смертоносная лава (от 65 до 140 высоты).
@@ -52,6 +54,8 @@ section: mechanics
 
 - Ограничения: В радиусе 40 блоков принудительно отключается полёт (/fly).
 
+<div class="action-links"><a class="primary-button" href="https://docs.google.com/spreadsheets/d/1-QrUjd3eiQXaHl3DXfHZS63UvDbXt42sYJTSzrf6WYE/edit?usp=sharing" target="_blank" rel="noopener noreferrer">Таблица предметов и шансов <span>↗</span></a></div>
+
 ### Маяк Алчности
 
 - Описание: Масштабная структура с испытаниями на удержание точки.
@@ -65,6 +69,20 @@ section: mechanics
 - Жертвенная плита (Обсидиан): повышает уровень ключа для финального Хранилища в зависимости от времени удержания (от 1 уровня за 3-7 сек, до 5 уровня за 40+ сек).
 
 - Ограничения: В радиусе 30 блоков отключён полёт (/fly).
+
+<div class="action-links"><a class="primary-button" href="https://docs.google.com/spreadsheets/d/1-c3lEoPdEEc7t9Y04qP6viLtADQyHoh-GCwM3afBKLE/edit?usp=sharing" target="_blank" rel="noopener noreferrer">Таблица предметов и шансов <span>↗</span></a></div>
+
+### Гонки на лодках
+
+**«Испытание на скорость, ловкость и умение управлять лодкой на льду.»**
+
+- **Описание:** Ивент переносит вас на специальную гоночную трассу, покрытую льдом. Вам предстоит соревноваться с другими игроками в умении дрифтить на лодках.
+
+- **Механика:** На старте участники появляются в своих лодках за барьерами. После отсчёта барьеры исчезают и начинается гонка. Ваша задача — опередить соперников и первым добраться до финиша, где расположен **сундук с вещами**.
+
+- **Награды:** В финальном сундуке генерируется множество ценных наград. Игрок, который доберётся до него первым, сможет забрать самые ценные призы.
+
+<div class="action-links"><a class="primary-button" href="https://docs.google.com/spreadsheets/d/1WD_oep364OGmpuVckghYHBeS9CYSyRX95I3VUz2y1l8/edit?gid=1512124455#gid=1512124455" target="_blank" rel="noopener noreferrer">Таблица наград гонки <span>↗</span></a></div>
 
 ### Расписание ивентов
 

@@ -4,6 +4,14 @@ const backdrop = document.querySelector('#backdrop');
 const menuButton = document.querySelector('#menu-button');
 const search = document.querySelector('#nav-search');
 
+document.querySelectorAll('a[href^="http"]').forEach((link) => {
+  const target = new URL(link.href, window.location.href);
+  if (target.origin !== window.location.origin) {
+    link.target = '_blank';
+    link.rel = 'noopener noreferrer';
+  }
+});
+
 function toggleMenu(force) {
   const open = force ?? !sidebar.classList.contains('open');
   sidebar.classList.toggle('open', open);

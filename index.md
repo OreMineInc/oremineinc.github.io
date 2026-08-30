@@ -42,3 +42,14 @@ icon: 🏠
   <a class="doc-card" href="{{ '/earning/' | relative_url }}"><span>💰</span><strong>Как зарабатывать</strong><small>Экономика и способы дохода</small></a>
   <a class="doc-card" href="{{ '/commands/' | relative_url }}"><span>⌨️</span><strong>Команды</strong><small>Полезные команды сервера</small></a>
 </div>
+
+## Официальные ссылки
+
+<div class="link-grid">
+  <a class="official-link" href="https://oremine.me" target="_blank" rel="noopener noreferrer"><span>🌐</span><strong>Сайт OreMine</strong><small>Новости, магазин и информация о проекте</small></a>
+  <a class="official-link" href="https://discord.gg/etSbw3BGZQ" target="_blank" rel="noopener noreferrer"><span>🔗</span><strong>Discord — запасная ссылка</strong><small>Используйте, если основная недоступна</small></a>
+  <a class="official-link" href="https://vk.ru/oremineru" target="_blank" rel="noopener noreferrer"><span>🔵</span><strong>ВКонтакте</strong><small>Официальная страница проекта</small></a>
+  <a class="official-link" href="https://oremine.me/?page-rules/" target="_blank" rel="noopener noreferrer"><span>📜</span><strong>Правила сервера</strong><small>Актуальная версия на сайте</small></a>
+</div>
+
+> 🎮 Адрес сервера: `mc.oremine.me` или `mc.oremine.ru`.
