@@ -75,9 +75,15 @@
     </aside>
 
     <main class="content-wrap">
-      <article class="content">
-        {{ content }}
-      </article>
+      <div class="content-layout">
+        <article class="content" id="article-content">
+          {{ content }}
+        </article>
+        <aside class="page-toc" id="page-toc" aria-label="Содержание страницы">
+          <p>НА ЭТОЙ СТРАНИЦЕ</p>
+          <nav id="page-toc-links"></nav>
+        </aside>
+      </div>
       <footer class="page-footer">
         <span>OreMine Wiki</span>
         <button id="theme-button" type="button" aria-label="Переключить тему">◐</button>

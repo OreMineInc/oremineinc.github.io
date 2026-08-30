@@ -38,3 +38,48 @@ document.querySelector('#theme-button')?.addEventListener('click', () => {
   root.dataset.theme = next;
   localStorage.setItem('oremine-theme', next);
 });
+
+document.querySelectorAll('#article-content table').forEach((table) => {
+  if (table.parentElement?.classList.contains('table-scroll')) return;
+  const wrapper = document.createElement('div');
+  wrapper.className = 'table-scroll';
+  table.parentNode.insertBefore(wrapper, table);
+  wrapper.appendChild(table);
+});
+
+const article = document.querySelector('#article-content');
+const toc = document.querySelector('#page-toc');
+const tocLinks = document.querySelector('#page-toc-links');
+const headings = [...(article?.querySelectorAll('h2, h3') ?? [])];
+
+if (headings.length < 3) {
+  if (toc) toc.hidden = true;
+} else {
+  const usedIds = new Set();
+  headings.forEach((heading, index) => {
+    let id = heading.id || heading.textContent
+      .toLowerCase()
+      .trim()
+      .replace(/[^a-zа-яё0-9]+/gi, '-')
+      .replace(/^-|-$/g, '') || `section-${index + 1}`;
+    const base = id;
+    let suffix = 2;
+    while (usedIds.has(id)) id = `${base}-${suffix++}`;
+    usedIds.add(id);
+    heading.id = id;
+
+    const link = document.createElement('a');
+    link.href = `#${id}`;
+    link.textContent = heading.textContent;
+    if (heading.tagName === 'H3') link.classList.add('sub');
+    tocLinks?.appendChild(link);
+  });
+
+  const links = [...(tocLinks?.querySelectorAll('a') ?? [])];
+  const observer = new IntersectionObserver((entries) => {
+    const visible = entries.find((entry) => entry.isIntersecting);
+    if (!visible) return;
+    links.forEach((link) => link.classList.toggle('active', link.hash === `#${visible.target.id}`));
+  }, { rootMargin: '-20% 0px -72% 0px' });
+  headings.forEach((heading) => observer.observe(heading));
+}
