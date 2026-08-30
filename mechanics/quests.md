@@ -6,7 +6,7 @@ permalink: /mechanics/quests/
 section: mechanics
 ---
 
-# 📋 Квесты и специализации
+# <img class="page-title-icon" src="{{ '/assets/images/astral-shard/shard-09.png' | relative_url }}" alt=""> Квесты и специализации
 
 Квесты
 

@@ -6,7 +6,7 @@ permalink: /mechanics/enchants/
 section: mechanics
 ---
 
-# 📖 Кастомные зачарования
+# <img class="page-title-icon" src="{{ '/assets/images/astral-shard/shard-11.png' | relative_url }}" alt=""> Кастомные зачарования
 
 Кастомные зачарования — это уникальная система, значительно расширяющая привычный игровой процесс Minecraft.
 

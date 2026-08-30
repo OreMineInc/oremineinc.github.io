@@ -6,13 +6,13 @@ permalink: /faq/
 section: reference
 ---
 
-# ❓ FAQ и помощь
+# <img class="page-title-icon" src="{{ '/assets/images/astral-shard/shard-30.png' | relative_url }}" alt=""> FAQ и помощь
 
 Нужна помощь или хотите связаться с сообществом? Используйте только официальные каналы OreMine.
 
 <div class="link-grid">
-  <a class="official-link" href="https://t.me/oreminestaff" target="_blank" rel="noopener noreferrer"><span>✈️</span><strong>Telegram поддержки</strong><small>Обращения по проблемам и вопросам</small></a>
-  <a class="official-link" href="https://discord.gg/oremine" target="_blank" rel="noopener noreferrer"><span>💬</span><strong>Discord OreMine</strong><small>Сообщество и формы обращений</small></a>
+  <a class="official-link" href="https://t.me/oreminestaff" target="_blank" rel="noopener noreferrer"><span><img class="astral-icon" src="{{ '/assets/images/astral-shard/shard-42.png' | relative_url }}" alt=""></span><strong>Telegram поддержки</strong><small>Обращения по проблемам и вопросам</small></a>
+  <a class="official-link" href="https://discord.gg/oremine" target="_blank" rel="noopener noreferrer"><span><img class="astral-icon" src="{{ '/assets/images/astral-shard/shard-43.png' | relative_url }}" alt=""></span><strong>Discord OreMine</strong><small>Сообщество и формы обращений</small></a>
 </div>
 
 ## Меня убили и забрали вещи. Вернут ли их?

@@ -6,7 +6,7 @@ permalink: /earning/experience/
 section: earning
 ---
 
-# ✨ Обмен опыта
+# <img class="page-title-icon" src="{{ '/assets/images/astral-shard/shard-22.png' | relative_url }}" alt=""> Обмен опыта
 
 Команда /expexchange позволяет обменивать уровни опыта на бутылочки опыта.
 

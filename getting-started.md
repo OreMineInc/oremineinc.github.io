@@ -6,7 +6,7 @@ permalink: /getting-started/
 section: basics
 ---
 
-# 🚀 Начало игры
+# <img class="page-title-icon" src="{{ '/assets/images/astral-shard/shard-02.png' | relative_url }}" alt=""> Начало игры
 
 ## Начало игры
 

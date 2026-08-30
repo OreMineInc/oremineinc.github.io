@@ -6,7 +6,7 @@ permalink: /mechanics/duels/
 section: mechanics
 ---
 
-# 🤺 Дуэли
+# <img class="page-title-icon" src="{{ '/assets/images/astral-shard/shard-16.png' | relative_url }}" alt=""> Дуэли
 
 Дуэли — сражения между игроками на монеты и ресурсы:
 

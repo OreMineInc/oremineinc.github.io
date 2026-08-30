@@ -6,7 +6,7 @@ permalink: /commands/
 section: reference
 ---
 
-# ⌨️ Команды сервера
+# <img class="page-title-icon" src="{{ '/assets/images/astral-shard/shard-27.png' | relative_url }}" alt=""> Команды сервера
 
 ## Структура меню /info
 

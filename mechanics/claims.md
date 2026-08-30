@@ -6,7 +6,7 @@ permalink: /mechanics/claims/
 section: mechanics
 ---
 
-# 🛡️ Приваты и защита базы
+# <img class="page-title-icon" src="{{ '/assets/images/astral-shard/shard-06.png' | relative_url }}" alt=""> Приваты и защита базы
 
 ## Обычные приваты
 

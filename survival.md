@@ -6,7 +6,7 @@ permalink: /survival/
 section: basics
 ---
 
-# 🌲 Выживание и ресурсы
+# <img class="page-title-icon" src="{{ '/assets/images/astral-shard/shard-04.png' | relative_url }}" alt=""> Выживание и ресурсы
 
 ## Прогресс
 

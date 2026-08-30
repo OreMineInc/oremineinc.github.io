@@ -6,7 +6,7 @@ permalink: /earning/
 section: earning
 ---
 
-# 💰 Экономика и заработок
+# <img class="page-title-icon" src="{{ '/assets/images/astral-shard/shard-21.png' | relative_url }}" alt=""> Экономика и заработок
 
 ## Экономика и торговля
 

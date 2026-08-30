@@ -6,7 +6,7 @@ permalink: /mechanics/
 section: mechanics
 ---
 
-# ⚙️ Механики
+# <img class="page-title-icon" src="{{ '/assets/images/astral-shard/shard-05.png' | relative_url }}" alt=""> Механики
 
 В этом разделе собраны особенности игрового процесса OreMine: от защиты базы и PvP до уникальных зачарований, крафтов и отделок брони.
 

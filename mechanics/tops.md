@@ -6,7 +6,7 @@ permalink: /mechanics/tops/
 section: mechanics
 ---
 
-# 🏆 Топы игроков
+# <img class="page-title-icon" src="{{ '/assets/images/astral-shard/shard-14.png' | relative_url }}" alt=""> Топы игроков
 
 Рейтинг находится на /warp tops. Игроки могут отображаться по убийствам, балансу, времени онлайн и очкам кланов.
 

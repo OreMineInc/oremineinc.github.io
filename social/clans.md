@@ -6,7 +6,7 @@ permalink: /social/clans/
 section: social
 ---
 
-# 🏰 Кланы и команды
+# <img class="page-title-icon" src="{{ '/assets/images/astral-shard/shard-24.png' | relative_url }}" alt=""> Кланы и команды
 
 Клан помогает защищать базу, развивать общую экономику и участвовать в войнах/событиях. Точные команды зависят от плагина: часто используются /clan, /clan create, /clan invite, /clan leave
 

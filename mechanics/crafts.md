@@ -6,7 +6,7 @@ permalink: /mechanics/crafts/
 section: mechanics
 ---
 
-# 🧰 Кастомные крафты
+# <img class="page-title-icon" src="{{ '/assets/images/astral-shard/shard-13.png' | relative_url }}" alt=""> Кастомные крафты
 
 Система кастомных крафтов открывается командой /crafts. Она позволяет создавать уникальные предметы, которых нет среди стандартных рецептов Minecraft.
 

@@ -6,7 +6,7 @@ permalink: /mechanics/pvp/
 section: mechanics
 ---
 
-# ⚔️ PvP, гриферство и рейды
+# <img class="page-title-icon" src="{{ '/assets/images/astral-shard/shard-07.png' | relative_url }}" alt=""> PvP, гриферство и рейды
 
 ## PvP
 
