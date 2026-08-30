@@ -17,4 +17,8 @@ section: mechanics
   <a class="doc-card" href="{{ '/mechanics/enchants/' | relative_url }}"><span>📖</span><strong>Зачарования</strong><small>Уникальные эффекты</small></a>
   <a class="doc-card" href="{{ '/mechanics/trims/' | relative_url }}"><span>🛡️</span><strong>Отделки брони</strong><small>Бонусы полных комплектов</small></a>
   <a class="doc-card" href="{{ '/mechanics/crafts/' | relative_url }}"><span>🧰</span><strong>Крафты</strong><small>Редкие рецепты сервера</small></a>
+  <a class="doc-card" href="{{ '/mechanics/events/' | relative_url }}"><span>🎯</span><strong>Ивенты</strong><small>Механики и расписание событий</small></a>
+  <a class="doc-card" href="{{ '/mechanics/cosmetics/' | relative_url }}"><span>🎨</span><strong>Косметика</strong><small>Космики, скины и их применение</small></a>
+  <a class="doc-card" href="{{ '/mechanics/ether-smith/' | relative_url }}"><span>⚒️</span><strong>Эфирный кузнец</strong><small>Чары и ритуал очистки</small></a>
+  <a class="doc-card" href="{{ '/mechanics/battlepass/' | relative_url }}"><span>🎫</span><strong>BattlePass</strong><small>Уровни, опыт, навыки и награды</small></a>
 </div>
