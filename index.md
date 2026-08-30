@@ -1,9 +1,33 @@
-# База знаний
+---
+layout: default
+title: Home
+description: Всё, что нужно знать об игре на OreMine
+permalink: /
+icon: 🏠
+---
 
-Добро пожаловать в нашу Wiki.
+# 🏠 Home
 
-## Разделы
+## Что такое OreMine?
 
-- [Начало работы](getting-started.md)
-- [Инструкции](instructions.md)
-- [Частые вопросы](faq.md)
+**OreMine** — гриферский Minecraft-сервер, где каждый игрок сам выбирает свой путь. Стройте базу, добывайте ресурсы, развивайте экономику, объединяйтесь с другими игроками или сражайтесь за территорию и ценные трофеи.
+
+Здесь недостаточно просто выживать: важно уметь защищать свои владения, находить выгодные способы заработка и разбираться в серверных механиках. Эта Wiki поможет быстро освоиться и получить ответы на основные вопросы.
+
+> ℹ️ База знаний находится в разработке. Разделы будут постепенно дополняться актуальной информацией.
+
+## С чего начать?
+
+1. Ознакомьтесь с [правилами сервера]({{ '/rules/' | relative_url }}).
+2. Изучите раздел [«Начало игры»]({{ '/getting-started/' | relative_url }}).
+3. Узнайте о [серверных механиках]({{ '/mechanics/' | relative_url }}).
+4. Выберите подходящий [способ заработка]({{ '/earning/' | relative_url }}).
+
+## Основные разделы
+
+<div class="card-grid">
+  <a class="doc-card" href="{{ '/getting-started/' | relative_url }}"><span>🚀</span><strong>Начало игры</strong><small>Первые шаги на сервере</small></a>
+  <a class="doc-card" href="{{ '/mechanics/' | relative_url }}"><span>⚙️</span><strong>Механики</strong><small>Особенности игрового процесса</small></a>
+  <a class="doc-card" href="{{ '/earning/' | relative_url }}"><span>💰</span><strong>Как зарабатывать</strong><small>Экономика и способы дохода</small></a>
+  <a class="doc-card" href="{{ '/commands/' | relative_url }}"><span>⌨️</span><strong>Команды</strong><small>Полезные команды сервера</small></a>
+</div>

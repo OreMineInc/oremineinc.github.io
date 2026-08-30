@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="{{ site.lang | default: 'ru-RU' }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101411">
+  <title>{{ page.title }} · {{ site.title }}</title>
+  <meta name="description" content="{{ page.description | default: site.description }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="{{ '/' | relative_url }}" aria-label="OreMine Wiki — главная">
+      <span class="brand-mark">⛏️</span>
+      <span>OreMine <b>Wiki</b></span>
+    </a>
+    <div class="top-actions">
+      <label class="search"><span>⌕</span><input id="nav-search" type="search" placeholder="Поиск по разделам..." aria-label="Поиск по разделам"><kbd>Ctrl K</kbd></label>
+      <button class="menu-button" id="menu-button" type="button" aria-label="Открыть меню">☰</button>
+    </div>
+  </header>
+
+  <div class="shell">
+    <aside class="sidebar" id="sidebar">
+      <nav id="navigation" aria-label="Разделы Wiki">
+        <a class="nav-link {% if page.url == '/' %}active{% endif %}" href="{{ '/' | relative_url }}"><span>🏠</span>Home</a>
+        <p class="nav-heading">ОСНОВЫ</p>
+        <a class="nav-link {% if page.url contains '/getting-started/' %}active{% endif %}" href="{{ '/getting-started/' | relative_url }}"><span>🚀</span>Начало игры</a>
+        <a class="nav-link {% if page.url contains '/rules/' %}active{% endif %}" href="{{ '/rules/' | relative_url }}"><span>📜</span>Правила сервера</a>
+        <a class="nav-link {% if page.url contains '/survival/' %}active{% endif %}" href="{{ '/survival/' | relative_url }}"><span>🌲</span>Выживание и ресурсы</a>
+
+        <p class="nav-heading">ИГРОВОЙ ПРОЦЕСС</p>
+        <details {% if page.section == 'mechanics' %}open{% endif %}>
+          <summary><span>⚙️</span>Механики</summary>
+          <a href="{{ '/mechanics/' | relative_url }}">Обзор механик</a>
+          <a href="{{ '/mechanics/claims/' | relative_url }}">Приваты и территории</a>
+          <a href="{{ '/mechanics/pvp/' | relative_url }}">PvP и гриферство</a>
+          <a href="{{ '/mechanics/events/' | relative_url }}">События</a>
+          <a href="{{ '/mechanics/quests/' | relative_url }}">Квесты</a>
+          <a href="{{ '/mechanics/smuggler/' | relative_url }}">Контрабандист</a>
+          <a href="{{ '/mechanics/enchants/' | relative_url }}">Зачарования</a>
+          <a href="{{ '/mechanics/potionstack/' | relative_url }}">Баффовар</a>
+          <a href="{{ '/mechanics/crafts/' | relative_url }}">Кастомные крафты</a>
+          <a href="{{ '/mechanics/tops/' | relative_url }}">Топы игроков</a>
+          <a href="{{ '/mechanics/trims/' | relative_url }}">Отделки брони</a>
+          <a href="{{ '/mechanics/duels/' | relative_url }}">Дуэли</a>
+          <a href="{{ '/mechanics/cases/' | relative_url }}">Кейсы</a>
+        </details>
+        <details {% if page.section == 'earning' %}open{% endif %}>
+          <summary><span>💰</span>Экономика</summary>
+          <a href="{{ '/earning/' | relative_url }}">Работы и заработок</a>
+          <a href="{{ '/earning/experience/' | relative_url }}">Обмен опыта</a>
+          <a href="{{ '/earning/auction/' | relative_url }}">Аукцион</a>
+        </details>
+        <details {% if page.section == 'social' %}open{% endif %}>
+          <summary><span>👥</span>Сообщество</summary>
+          <a href="{{ '/social/clans/' | relative_url }}">Кланы и команды</a>
+          <a href="{{ '/social/friends/' | relative_url }}">Друзья и репутация</a>
+          <a href="{{ '/social/voice/' | relative_url }}">Голосовой чат</a>
+        </details>
+
+        <p class="nav-heading">СПРАВОЧНИК</p>
+        <a class="nav-link {% if page.url contains '/commands/' %}active{% endif %}" href="{{ '/commands/' | relative_url }}"><span>⌨️</span>Команды</a>
+        <a class="nav-link {% if page.url contains '/donate/' %}active{% endif %}" href="{{ '/donate/' | relative_url }}"><span>💎</span>Донат и ранги</a>
+        <a class="nav-link {% if page.url contains '/security/' %}active{% endif %}" href="{{ '/security/' | relative_url }}"><span>🔒</span>Безопасность</a>
+        <a class="nav-link {% if page.url contains '/faq/' %}active{% endif %}" href="{{ '/faq/' | relative_url }}"><span>❓</span>FAQ</a>
+      </nav>
+      <div class="sidebar-footer"><span class="status-dot"></span> OreMine Wiki</div>
+    </aside>
+
+    <main class="content-wrap">
+      <article class="content">
+        {{ content }}
+      </article>
+      <footer class="page-footer">
+        <span>OreMine Wiki</span>
+        <button id="theme-button" type="button" aria-label="Переключить тему">◐</button>
+      </footer>
+    </main>
+  </div>
+  <div class="backdrop" id="backdrop"></div>
+  <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+</body>
+</html>

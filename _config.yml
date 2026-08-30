@@ -1,4 +1,6 @@
-title: База знаний
-description: Внутренняя документация компании
-theme: jekyll-theme-minimal
+title: OreMine Wiki
+description: База знаний гриферского Minecraft-сервера OreMine
 lang: ru-RU
+url: "https://wiki.oremine.me"
+markdown: kramdown
+permalink: pretty
