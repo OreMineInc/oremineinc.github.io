@@ -3,7 +3,6 @@ layout: default
 title: Home
 description: "Официальная Wiki Minecraft-сервера OreMine: быстрый старт, правила, команды, механики, экономика, безопасность и ответы на частые вопросы."
 permalink: /
-icon: 🏠
 ---
 
 # {% include astral-icon.html model="sapphire" class="page-title-icon" %} Home
@@ -52,4 +51,4 @@ icon: 🏠
   <a class="official-link" href="https://oremine.me/?page-rules/" target="_blank" rel="noopener noreferrer">{% include astral-icon.html model="dark-soul" %}<strong>Правила сервера</strong><small>Актуальная версия на сайте</small></a>
 </div>
 
-> 🎮 Адрес сервера: `mc.oremine.me` или `mc.oremine.ru`.
+> {% include news-icon.html model="comet" class="inline-emoji" %} Адрес сервера: `mc.oremine.me` или `mc.oremine.ru`.

@@ -10,7 +10,7 @@ section: basics
 
 Сервер допускает конкуренцию, PvP и рейды только в рамках правил. Незнание правил не освобождает от наказания.
 
-> 📌 Перед началом игры обязательно прочитайте [полную и актуальную версию правил на сайте OreMine](https://oremine.me/?page-rules/). При изменении правил приоритет всегда имеет версия на официальном сайте.
+> {% include news-icon.html model="important" class="inline-emoji" %} Перед началом игры обязательно прочитайте [полную и актуальную версию правил на сайте OreMine](https://oremine.me/?page-rules/). При изменении правил приоритет всегда имеет версия на официальном сайте.
 
 <div class="action-links"><a class="primary-button" href="https://oremine.me/?page-rules/" target="_blank" rel="noopener noreferrer">Полный список правил <span>↗</span></a></div>
 

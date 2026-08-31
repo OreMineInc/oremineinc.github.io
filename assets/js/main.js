@@ -6,9 +6,10 @@ const search = document.querySelector('#nav-search');
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-document.querySelectorAll('.astral-icon[data-lottie-path]').forEach((icon) => {
+document.querySelectorAll('.lottie-icon[data-lottie-path]').forEach((icon) => {
   const navTrigger = icon.closest('#navigation .nav-link, #navigation summary');
   const isTitleIcon = icon.classList.contains('page-title-icon');
+  const hoverOnly = icon.dataset.animate === 'hover';
   const trigger = navTrigger || (isTitleIcon ? icon : icon.closest('a, .donate-hero, .account-link-card')) || icon;
   const isCurrentSection = () => navTrigger?.classList.contains('active')
     || navTrigger?.parentElement?.classList.contains('nav-section-active');
@@ -32,7 +33,7 @@ document.querySelectorAll('.astral-icon[data-lottie-path]').forEach((icon) => {
   });
 
   const shouldAnimate = () => !reducedMotion.matches
-    && (isCurrentSection() || hovering || focused);
+    && (hoverOnly ? hovering || focused : isCurrentSection() || hovering || focused);
 
   const updateAnimation = () => {
     if (!icon.classList.contains('is-ready')) return;
@@ -48,7 +49,7 @@ document.querySelectorAll('.astral-icon[data-lottie-path]').forEach((icon) => {
   animation.addEventListener('DOMLoaded', () => {
     icon.classList.add('is-ready');
     animation.goToAndStop(0, true);
-    if (isTitleIcon && !reducedMotion.matches) {
+    if (isTitleIcon && !hoverOnly && !reducedMotion.matches) {
       animation.goToAndPlay(0, true);
       playing = true;
     } else {
