@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Баффовар
-description: Баффовар — OreMine Wiki
+description: "Гайд по Баффовару OreMine: стакание и скрещивание зелий через /potionstack, экономия места и подготовка усилений для PvP."
 permalink: /mechanics/potionstack/
 section: mechanics
 ---

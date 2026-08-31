@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Обмен опыта
-description: Обмен опыта — OreMine Wiki
+description: "Как обменивать уровни опыта на бутылочки опыта на OreMine с помощью команды /expexchange: принцип работы и практическое применение."
 permalink: /earning/experience/
 section: earning
 ---

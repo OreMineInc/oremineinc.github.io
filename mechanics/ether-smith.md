@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Эфирный кузнец
-description: Эфирный кузнец — OreMine Wiki
+description: "Эфирный кузнец OreMine: работа с кастомными зачарованиями экипировки и проведение ритуала очистки предметов."
 permalink: /mechanics/ether-smith/
 section: mechanics
 ---

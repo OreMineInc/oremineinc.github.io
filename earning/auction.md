@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Аукцион
-description: Аукцион — OreMine Wiki
+description: "Полный гайд по аукциону OreMine: команды /ah, выставление и покупка предметов, цены, сокращения, управление лотами и ограничения торговли."
 permalink: /earning/auction/
 section: earning
 ---

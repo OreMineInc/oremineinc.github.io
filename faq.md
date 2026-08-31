@@ -1,7 +1,7 @@
 ---
 layout: default
 title: FAQ и помощь
-description: FAQ и помощь — OreMine Wiki
+description: "Ответы на частые вопросы OreMine: потеря предметов, баги и дюпы, жалобы, предложения, поддержка и официальные каналы связи."
 permalink: /faq/
 section: reference
 ---

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Кастомные зачарования
-description: Кастомные зачарования — OreMine Wiki
+description: "Кастомные зачарования OreMine: особенности уникальных эффектов, применение к экипировке и отличие от стандартных чар Minecraft."
 permalink: /mechanics/enchants/
 section: mechanics
 ---

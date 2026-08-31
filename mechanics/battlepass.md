@@ -1,7 +1,7 @@
 ---
 layout: default
 title: BattlePass
-description: BattlePass — OreMine Wiki
+description: "BattlePass OreMine: лимиты прокачки, способы получения XP, очки навыков, уровни прогресса и награды боевого пропуска."
 permalink: /mechanics/battlepass/
 section: mechanics
 ---

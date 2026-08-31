@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Команды сервера
-description: Команды сервера — OreMine Wiki
+description: "Справочник команд OreMine: меню /info, телепортация, дома, варпы, экономика, торговля, общение и другие полезные функции сервера."
 permalink: /commands/
 section: reference
 ---

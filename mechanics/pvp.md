@@ -1,7 +1,7 @@
 ---
 layout: default
 title: PvP, гриферство и рейды
-description: PvP, гриферство и рейды — OreMine Wiki
+description: "Правила и особенности PvP на OreMine: сражения игроков, гриферство, рейды баз, подготовка экипировки и защита ценных ресурсов."
 permalink: /mechanics/pvp/
 section: mechanics
 ---

@@ -1,7 +1,11 @@
 title: OreMine Wiki
-description: База знаний гриферского Minecraft-сервера OreMine
+description: Официальная база знаний Minecraft-сервера OreMine с правилами, командами, игровыми механиками, экономикой и ответами на частые вопросы.
 lang: ru-RU
 url: "https://wiki.oremine.me"
+baseurl: ""
+author: OreMine
+logo: /assets/images/logo-oremine.png
+social_image: /assets/images/og-cover.png
 markdown: kramdown
 permalink: pretty
 exclude:

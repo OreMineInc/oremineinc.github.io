@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Кланы и команды
-description: Кланы и команды — OreMine Wiki
+description: "Кланы на OreMine: создание и развитие команды, приглашение игроков, роли участников, общая экономика, защита базы и участие в событиях."
 permalink: /social/clans/
 section: social
 ---

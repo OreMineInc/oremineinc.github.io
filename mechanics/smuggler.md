@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Контрабандист
-description: Контрабандист — OreMine Wiki
+description: "Контрабандист на OreMine: расписание появления, принцип торговли, подготовка к визиту NPC и доступные редкие предложения."
 permalink: /mechanics/smuggler/
 section: mechanics
 ---

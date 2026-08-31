@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Кейсы
-description: Кейсы и награды — OreMine Wiki
+description: "Кейсы OreMine: команды и локация открытия, способы покупки, виды кейсов и возможные награды — ресурсы, валюта, гемы и привилегии."
 permalink: /mechanics/cases/
 section: mechanics
 ---

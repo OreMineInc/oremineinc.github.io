@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Голосовой чат
-description: Голосовой чат — OreMine Wiki
+description: "Как настроить голосовой чат Simple Voice Chat на OreMine: установка модификации, подключение, управление звуком и решение частых проблем."
 permalink: /social/voice/
 section: social
 ---

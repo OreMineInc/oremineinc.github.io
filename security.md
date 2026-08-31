@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Безопасность и поддержка
-description: Безопасность и поддержка — OreMine Wiki
+description: "Как защитить аккаунт OreMine: надёжный пароль, привязка профиля, двухфакторная защита, восстановление доступа и обращение в поддержку."
 permalink: /security/
 section: reference
 ---

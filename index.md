@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Home
-description: Всё, что нужно знать об игре на OreMine
+description: "Официальная Wiki Minecraft-сервера OreMine: быстрый старт, правила, команды, механики, экономика, безопасность и ответы на частые вопросы."
 permalink: /
 icon: 🏠
 ---

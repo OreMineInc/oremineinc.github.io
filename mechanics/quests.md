@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Квесты и специализации
-description: Квесты и специализации — OreMine Wiki
+description: "Система квестов и специализаций OreMine: выполнение заданий, развитие выбранного направления и получение наград за прогресс."
 permalink: /mechanics/quests/
 section: mechanics
 ---

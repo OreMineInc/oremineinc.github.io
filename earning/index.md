@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Экономика и заработок
-description: Экономика и заработок — OreMine Wiki
+description: "Экономика OreMine: способы заработка, система работ, торговля с игроками, управление балансом и рекомендации для стабильного дохода."
 permalink: /earning/
 section: earning
 ---

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Приваты и защита базы
-description: Приваты и защита базы — OreMine Wiki
+description: "Как защитить базу на OreMine: обычные приваты, территории на анархии, управление доступом и практические советы по безопасности построек."
 permalink: /mechanics/claims/
 section: mechanics
 ---

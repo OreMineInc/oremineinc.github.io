@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Правила сервера
-description: Правила сервера — OreMine Wiki
+description: "Правила Minecraft-сервера OreMine: допустимое PvP и рейды, запрещённые действия, ответственность игроков и возможные наказания."
 permalink: /rules/
 section: basics
 ---

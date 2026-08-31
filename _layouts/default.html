@@ -1,12 +1,137 @@
 <!doctype html>
-<html lang="{{ site.lang | default: 'ru-RU' }}">
+<html lang="{{ site.lang | default: 'ru-RU' }}" prefix="og: https://ogp.me/ns#">
 <head>
+  {% capture seo_title %}{% if page.url == '/' %}{{ site.title }} — база знаний сервера{% else %}{{ page.title }} · {{ site.title }}{% endif %}{% endcapture %}
+  {% assign seo_title = seo_title | strip %}
+  {% assign seo_description = page.description | default: site.description | strip %}
+  {% assign canonical_url = page.url | absolute_url %}
+  {% assign social_image_path = page.image | default: site.social_image %}
+  {% assign social_image_url = social_image_path | absolute_url %}
+  {% assign logo_url = site.logo | absolute_url %}
+  {% assign site_root = '/' | absolute_url %}
+  {% assign organization_id = site_root | append: '#organization' %}
+  {% assign website_id = site_root | append: '#website' %}
+  {% assign webpage_id = canonical_url | append: '#webpage' %}
+  {% assign breadcrumb_id = canonical_url | append: '#breadcrumb' %}
+  {% assign og_type = 'article' %}
+  {% if page.url == '/' %}{% assign og_type = 'website' %}{% endif %}
+  {% assign section_name = nil %}
+  {% assign section_url = nil %}
+  {% case page.section %}
+    {% when 'basics' %}{% assign section_name = 'Основы' %}
+    {% when 'mechanics' %}{% assign section_name = 'Механики' %}{% assign section_url = '/mechanics/' | absolute_url %}
+    {% when 'earning' %}{% assign section_name = 'Экономика и заработок' %}{% assign section_url = '/earning/' | absolute_url %}
+    {% when 'social' %}{% assign section_name = 'Сообщество' %}
+    {% when 'reference' %}{% assign section_name = 'Справочник' %}
+  {% endcase %}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#101411">
-  <title>{{ page.title }} · {{ site.title }}</title>
-  <meta name="description" content="{{ page.description | default: site.description }}">
+  <title>{{ seo_title | escape }}</title>
+  <meta name="description" content="{{ seo_description | escape }}">
+  <meta name="author" content="{{ site.author | escape }}">
+  <meta name="application-name" content="{{ site.title | escape }}">
+  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
+  <link rel="canonical" href="{{ canonical_url }}">
+
+  <meta property="og:title" content="{{ seo_title | escape }}">
+  <meta property="og:description" content="{{ seo_description | escape }}">
+  <meta property="og:type" content="{{ og_type }}">
+  <meta property="og:url" content="{{ canonical_url }}">
+  <meta property="og:site_name" content="{{ site.title | escape }}">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:image" content="{{ social_image_url }}">
+  <meta property="og:image:secure_url" content="{{ social_image_url }}">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Логотип OreMine Wiki на фирменном фоне">
+  {% if page.section %}<meta property="article:section" content="{{ section_name | default: page.section | escape }}">{% endif %}
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ seo_title | escape }}">
+  <meta name="twitter:description" content="{{ seo_description | escape }}">
+  <meta name="twitter:image" content="{{ social_image_url }}">
+  <meta name="twitter:image:alt" content="Логотип OreMine Wiki на фирменном фоне">
+
   <link rel="icon" type="image/svg+xml" href="{{ '/assets/images/logo-oremine.svg' | relative_url }}">
+  <link rel="apple-touch-icon" href="{{ site.logo | relative_url }}">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "Organization",
+        "@id": {{ organization_id | jsonify }},
+        "name": "OreMine",
+        "url": "https://oremine.me/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": {{ logo_url | jsonify }},
+          "width": 512,
+          "height": 512
+        }
+      },
+      {
+        "@type": "WebSite",
+        "@id": {{ website_id | jsonify }},
+        "url": {{ site_root | jsonify }},
+        "name": {{ site.title | jsonify }},
+        "description": {{ site.description | jsonify }},
+        "inLanguage": {{ site.lang | jsonify }},
+        "publisher": { "@id": {{ organization_id | jsonify }} }
+      },
+      {
+        "@type": "WebPage",
+        "@id": {{ webpage_id | jsonify }},
+        "url": {{ canonical_url | jsonify }},
+        "name": {{ seo_title | jsonify }},
+        "description": {{ seo_description | jsonify }},
+        "inLanguage": {{ site.lang | jsonify }},
+        "isPartOf": { "@id": {{ website_id | jsonify }} },
+        "about": { "@id": {{ organization_id | jsonify }} },
+        "publisher": { "@id": {{ organization_id | jsonify }} },
+        "primaryImageOfPage": {
+          "@type": "ImageObject",
+          "url": {{ social_image_url | jsonify }},
+          "width": 1200,
+          "height": 630
+        },
+        "breadcrumb": { "@id": {{ breadcrumb_id | jsonify }} }
+      },
+      {
+        "@type": "BreadcrumbList",
+        "@id": {{ breadcrumb_id | jsonify }},
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": {{ site.title | jsonify }},
+            "item": {{ site_root | jsonify }}
+          }{% unless page.url == '/' %},{% if section_name and section_url and canonical_url != section_url %}
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": {{ section_name | jsonify }},
+            "item": {{ section_url | jsonify }}
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": {{ page.title | jsonify }},
+            "item": {{ canonical_url | jsonify }}
+          }{% else %}
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": {{ page.title | jsonify }},
+            "item": {{ canonical_url | jsonify }}
+          }{% endif %}{% endunless %}
+        ]
+      }
+    ]
+  }
+  </script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">

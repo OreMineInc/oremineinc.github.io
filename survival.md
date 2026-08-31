@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Выживание и ресурсы
-description: Выживание и ресурсы — OreMine Wiki
+description: "Руководство по выживанию на OreMine: развитие персонажа, добыча ресурсов, подготовка к опасным мирам и требования к безопасным фермам."
 permalink: /survival/
 section: basics
 ---

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Друзья и репутация
-description: Друзья и репутация — OreMine Wiki
+description: "Система друзей и репутации OreMine: добавление игроков, управление списком контактов и взаимодействие с участниками сообщества."
 permalink: /social/friends/
 section: social
 ---

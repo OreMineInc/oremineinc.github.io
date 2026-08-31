@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Кастомные крафты
-description: Кастомные крафты — OreMine Wiki
+description: "Кастомные крафты OreMine: использование меню /crafts, создание уникальных предметов и работа с нестандартными рецептами сервера."
 permalink: /mechanics/crafts/
 section: mechanics
 ---

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Дуэли
-description: Дуэли — OreMine Wiki
+description: "Дуэли на OreMine: организация честного сражения между игроками, ставки монет и ресурсов, подготовка и условия завершения боя."
 permalink: /mechanics/duels/
 section: mechanics
 ---

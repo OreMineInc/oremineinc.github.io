@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Начало игры
-description: Начало игры — OreMine Wiki
+description: "Пошаговое начало игры на OreMine: стартовый набор, серверное меню, случайная телепортация, варпы и первые действия после входа."
 permalink: /getting-started/
 section: basics
 ---

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Отделки брони
-description: Отделки брони — OreMine Wiki
+description: "Система отделок брони OreMine: открытие меню командой /trims, доступные виды оформления и применение отделок к экипировке."
 permalink: /mechanics/trims/
 section: mechanics
 ---

@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Донат и услуги
-description: Официальные донат-услуги OreMine
+description: "Официальные услуги OreMine: привилегии, кейсы, гемы и другие предложения магазина, а также рекомендации по безопасной покупке."
 permalink: /donate/
 section: reference
 ---

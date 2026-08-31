@@ -1,7 +1,7 @@
 ---
 layout: default
 title: События и ивенты
-description: События и ивенты — OreMine Wiki
+description: "События и игровые ивенты OreMine: доступные активности, участие игроков, подготовка и награды за выполнение условий мероприятий."
 permalink: /mechanics/events/
 section: mechanics
 ---

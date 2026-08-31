@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Механики
-description: Все игровые механики сервера OreMine
+description: "Обзор игровых механик OreMine: приваты, PvP, события, квесты, зачарования, крафты, косметика, дуэли, кейсы и BattlePass."
 permalink: /mechanics/
 section: mechanics
 ---

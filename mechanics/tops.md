@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Топы игроков
-description: Топы игроков — OreMine Wiki
+description: "Рейтинги игроков OreMine на /warp tops: лидеры по убийствам, балансу, времени в игре и очкам кланов."
 permalink: /mechanics/tops/
 section: mechanics
 ---

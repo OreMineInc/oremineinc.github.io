@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Косметика
-description: Косметика — OreMine Wiki
+description: "Косметика OreMine: валюта «Космики», получение и использование скинов, а также визуальная персонализация игрового профиля."
 permalink: /mechanics/cosmetics/
 section: mechanics
 ---
