@@ -6,7 +6,7 @@ permalink: /mechanics/potionstack/
 section: mechanics
 ---
 
-# <img class="page-title-icon" src="{{ '/assets/images/astral-shard/shard-12.png' | relative_url }}" alt=""> Баффовар
+# {% include astral-icon.html model="amethyst" class="page-title-icon" %} Баффовар
 
 Открыть интерфейс Бафовара можно командой /potionstack или на локации /warp potion. Данный функционал позволяет эффективно экономить место в инвентаре и быстро готовиться к PvP-сражениям, предлагая две уникальные механики работы с зельями.
 

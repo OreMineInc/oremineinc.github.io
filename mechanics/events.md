@@ -6,7 +6,7 @@ permalink: /mechanics/events/
 section: mechanics
 ---
 
-# <img class="page-title-icon" src="{{ '/assets/images/astral-shard/shard-08.png' | relative_url }}" alt=""> События и ивенты
+# {% include astral-icon.html model="amethyst" class="page-title-icon" %} События и ивенты
 
 ## События и активности
 

@@ -6,12 +6,12 @@ permalink: /donate/
 section: reference
 ---
 
-# <img class="page-title-icon" src="{{ '/assets/images/astral-shard/shard-28.png' | relative_url }}" alt=""> Донат и услуги
+# {% include astral-icon.html model="tanzanite" class="page-title-icon" %} Донат и услуги
 
 Донат — это добровольный способ поддержать развитие OreMine и получить дополнительные игровые возможности. Актуальные привилегии, кейсы, гемы, услуги, цены и подробное описание каждого предложения собраны в официальном магазине проекта.
 
 <div class="donate-hero">
-  <span class="donate-hero__icon"><img class="astral-icon" src="{{ '/assets/images/astral-shard/shard-45.png' | relative_url }}" alt=""></span>
+  <span class="donate-hero__icon">{% include astral-icon.html model="nectarite" %}</span>
   <div>
     <strong>Выберите подходящую услугу на сайте OreMine</strong>
     <p>В магазине всегда отображаются актуальные цены, состав привилегий и доступные способы покупки.</p>

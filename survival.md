@@ -6,7 +6,7 @@ permalink: /survival/
 section: basics
 ---
 
-# <img class="page-title-icon" src="{{ '/assets/images/astral-shard/shard-04.png' | relative_url }}" alt=""> Выживание и ресурсы
+# {% include astral-icon.html model="emerald" class="page-title-icon" %} Выживание и ресурсы
 
 ## Прогресс
 

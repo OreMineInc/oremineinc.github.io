@@ -6,7 +6,7 @@ permalink: /mechanics/smuggler/
 section: mechanics
 ---
 
-# <img class="page-title-icon" src="{{ '/assets/images/astral-shard/shard-10.png' | relative_url }}" alt=""> Контрабандист
+# {% include astral-icon.html model="amethyst" class="page-title-icon" %} Контрабандист
 
 Он появляется три раза в день:
 

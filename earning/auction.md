@@ -6,7 +6,7 @@ permalink: /earning/auction/
 section: earning
 ---
 
-# <img class="page-title-icon" src="{{ '/assets/images/astral-shard/shard-23.png' | relative_url }}" alt=""> Аукцион
+# {% include astral-icon.html model="sunstone" class="page-title-icon" %} Аукцион
 
 Аукцион — это главная площадка для безопасной торговли предметами между игроками. Открыть интерфейс можно командой /ah (а также /auc, /market, /auction) или посетив локацию /warp ah.
 

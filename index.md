@@ -6,7 +6,7 @@ permalink: /
 icon: 🏠
 ---
 
-# <img class="page-title-icon" src="{{ '/assets/images/astral-shard/shard-01.png' | relative_url }}" alt=""> Home
+# {% include astral-icon.html model="sapphire" class="page-title-icon" %} Home
 
 ## Что такое OreMine?
 
@@ -37,19 +37,19 @@ icon: 🏠
 ## Основные разделы
 
 <div class="card-grid">
-  <a class="doc-card" href="{{ '/getting-started/' | relative_url }}"><span><img class="astral-icon" src="{{ '/assets/images/astral-shard/shard-17.png' | relative_url }}" alt=""></span><strong>Начало игры</strong><small>Первые шаги на сервере</small></a>
-  <a class="doc-card" href="{{ '/mechanics/' | relative_url }}"><span><img class="astral-icon" src="{{ '/assets/images/astral-shard/shard-18.png' | relative_url }}" alt=""></span><strong>Механики</strong><small>Особенности игрового процесса</small></a>
-  <a class="doc-card" href="{{ '/earning/' | relative_url }}"><span><img class="astral-icon" src="{{ '/assets/images/astral-shard/shard-26.png' | relative_url }}" alt=""></span><strong>Как зарабатывать</strong><small>Экономика и способы дохода</small></a>
-  <a class="doc-card" href="{{ '/commands/' | relative_url }}"><span><img class="astral-icon" src="{{ '/assets/images/astral-shard/shard-30.png' | relative_url }}" alt=""></span><strong>Команды</strong><small>Полезные команды сервера</small></a>
+  <a class="doc-card" href="{{ '/getting-started/' | relative_url }}">{% include astral-icon.html model="labradorite" %}<strong>Начало игры</strong><small>Первые шаги на сервере</small></a>
+  <a class="doc-card" href="{{ '/mechanics/' | relative_url }}">{% include astral-icon.html model="tourmaline" %}<strong>Механики</strong><small>Особенности игрового процесса</small></a>
+  <a class="doc-card" href="{{ '/earning/' | relative_url }}">{% include astral-icon.html model="warholite" %}<strong>Как зарабатывать</strong><small>Экономика и способы дохода</small></a>
+  <a class="doc-card" href="{{ '/commands/' | relative_url }}">{% include astral-icon.html model="pure-silver" %}<strong>Команды</strong><small>Полезные команды сервера</small></a>
 </div>
 
 ## Официальные ссылки
 
 <div class="link-grid">
-  <a class="official-link" href="https://oremine.me" target="_blank" rel="noopener noreferrer"><span><img class="astral-icon" src="{{ '/assets/images/astral-shard/shard-33.png' | relative_url }}" alt=""></span><strong>Сайт OreMine</strong><small>Новости, магазин и информация о проекте</small></a>
-  <a class="official-link" href="https://discord.gg/etSbw3BGZQ" target="_blank" rel="noopener noreferrer"><span><img class="astral-icon" src="{{ '/assets/images/astral-shard/shard-34.png' | relative_url }}" alt=""></span><strong>Discord — запасная ссылка</strong><small>Используйте, если основная недоступна</small></a>
-  <a class="official-link" href="https://vk.ru/oremineru" target="_blank" rel="noopener noreferrer"><span><img class="astral-icon" src="{{ '/assets/images/astral-shard/shard-35.png' | relative_url }}" alt=""></span><strong>ВКонтакте</strong><small>Официальная страница проекта</small></a>
-  <a class="official-link" href="https://oremine.me/?page-rules/" target="_blank" rel="noopener noreferrer"><span><img class="astral-icon" src="{{ '/assets/images/astral-shard/shard-36.png' | relative_url }}" alt=""></span><strong>Правила сервера</strong><small>Актуальная версия на сайте</small></a>
+  <a class="official-link" href="https://oremine.me" target="_blank" rel="noopener noreferrer">{% include astral-icon.html model="silver-art" %}<strong>Сайт OreMine</strong><small>Новости, магазин и информация о проекте</small></a>
+  <a class="official-link" href="https://discord.gg/etSbw3BGZQ" target="_blank" rel="noopener noreferrer">{% include astral-icon.html model="gramite" %}<strong>Discord — запасная ссылка</strong><small>Используйте, если основная недоступна</small></a>
+  <a class="official-link" href="https://vk.ru/oremineru" target="_blank" rel="noopener noreferrer">{% include astral-icon.html model="galactite" %}<strong>ВКонтакте</strong><small>Официальная страница проекта</small></a>
+  <a class="official-link" href="https://oremine.me/?page-rules/" target="_blank" rel="noopener noreferrer">{% include astral-icon.html model="dark-soul" %}<strong>Правила сервера</strong><small>Актуальная версия на сайте</small></a>
 </div>
 
 > 🎮 Адрес сервера: `mc.oremine.me` или `mc.oremine.ru`.

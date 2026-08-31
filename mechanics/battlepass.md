@@ -6,7 +6,7 @@ permalink: /mechanics/battlepass/
 section: mechanics
 ---
 
-# <img class="page-title-icon" src="{{ '/assets/images/astral-shard/shard-20.png' | relative_url }}" alt=""> BattlePass
+# {% include astral-icon.html model="amethyst" class="page-title-icon" %} BattlePass
 
 Боевой Пропуск (Батлпасс)
 

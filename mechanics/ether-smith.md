@@ -6,7 +6,7 @@ permalink: /mechanics/ether-smith/
 section: mechanics
 ---
 
-# <img class="page-title-icon" src="{{ '/assets/images/astral-shard/shard-19.png' | relative_url }}" alt=""> Эфирный кузнец
+# {% include astral-icon.html model="amethyst" class="page-title-icon" %} Эфирный кузнец
 
 У NPC «Эфирный кузнец» доступны две уникальные механики для работы с вашей экипировкой.
 

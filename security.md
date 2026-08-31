@@ -6,7 +6,7 @@ permalink: /security/
 section: reference
 ---
 
-# <img class="page-title-icon" src="{{ '/assets/images/astral-shard/shard-29.png' | relative_url }}" alt=""> Безопасность и поддержка
+# {% include astral-icon.html model="bouquet" class="page-title-icon" %} Безопасность и поддержка
 
 ## Безопасность аккаунта
 
@@ -25,7 +25,7 @@ section: reference
 Обязательно привяжите игровой аккаунт к Telegram. Это добавит дополнительный уровень защиты и поможет подтверждать важные действия через официальный бот OreMine.
 
 <div class="account-link-card">
-  <span class="account-link-card__icon"><img class="astral-icon" src="{{ '/assets/images/astral-shard/shard-46.png' | relative_url }}" alt=""></span>
+  <span class="account-link-card__icon">{% include astral-icon.html model="barbed" %}</span>
   <div>
     <strong>Подключить защиту аккаунта</strong>
     <p>Откройте официального Telegram-бота OreMine и следуйте инструкции по привязке.</p>

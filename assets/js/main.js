@@ -6,88 +6,78 @@ const search = document.querySelector('#nav-search');
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-document.querySelectorAll('#navigation .nav-icon[data-lottie-path]').forEach((icon) => {
-  const trigger = icon.closest('.nav-link, summary');
-  const animationHost = icon.querySelector('.nav-icon__animated');
-  const isCurrentSection = () => trigger?.classList.contains('active')
-    || trigger?.parentElement?.classList.contains('nav-section-active');
-  let animation;
-  let loading = false;
-  let playing = false;
+document.querySelectorAll('.astral-icon[data-lottie-path]').forEach((icon) => {
+  const navTrigger = icon.closest('#navigation .nav-link, #navigation summary');
+  const isTitleIcon = icon.classList.contains('page-title-icon');
+  const trigger = navTrigger || (isTitleIcon ? icon : icon.closest('a, .donate-hero, .account-link-card')) || icon;
+  const isCurrentSection = () => navTrigger?.classList.contains('active')
+    || navTrigger?.parentElement?.classList.contains('nav-section-active');
   let hovering = false;
   let focused = false;
+  let playing = false;
 
-  const shouldAnimate = () => !reducedMotion.matches && (isCurrentSection() || hovering || focused);
+  if (typeof window.lottie?.loadAnimation !== 'function') return;
+
+  const animation = window.lottie.loadAnimation({
+    container: icon,
+    renderer: 'svg',
+    loop: Boolean(navTrigger),
+    autoplay: false,
+    path: icon.dataset.lottiePath,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid meet',
+      progressiveLoad: true,
+      focusable: false,
+    },
+  });
+
+  const shouldAnimate = () => !reducedMotion.matches
+    && (isCurrentSection() || hovering || focused);
 
   const updateAnimation = () => {
-    const play = shouldAnimate();
-    icon.classList.toggle('is-animating', play);
-
-    if (!play) {
-      if (playing) animation?.stop();
+    if (!icon.classList.contains('is-ready')) return;
+    if (shouldAnimate()) {
+      if (!playing) animation.goToAndPlay(0, true);
+      playing = true;
+    } else {
+      animation.goToAndStop(0, true);
       playing = false;
-      return;
     }
-
-    if (animation) {
-      if (!playing) {
-        animation.goToAndPlay(0, true);
-        playing = true;
-      }
-      return;
-    }
-
-    if (loading || !animationHost || typeof window.lottie?.loadAnimation !== 'function') return;
-    loading = true;
-    animation = window.lottie.loadAnimation({
-      container: animationHost,
-      renderer: 'svg',
-      loop: true,
-      autoplay: false,
-      path: icon.dataset.lottiePath,
-      rendererSettings: {
-        preserveAspectRatio: 'xMidYMid meet',
-        progressiveLoad: true,
-        focusable: false,
-      },
-    });
-
-    animation.addEventListener('DOMLoaded', () => {
-      loading = false;
-      icon.classList.add('is-ready');
-      if (shouldAnimate()) {
-        animation.goToAndPlay(0, true);
-        playing = true;
-      }
-    });
-
-    animation.addEventListener('data_failed', () => {
-      loading = false;
-      playing = false;
-      animation = undefined;
-      icon.classList.remove('is-ready');
-    });
   };
 
-  trigger?.addEventListener('mouseenter', () => {
+  animation.addEventListener('DOMLoaded', () => {
+    icon.classList.add('is-ready');
+    animation.goToAndStop(0, true);
+    if (isTitleIcon && !reducedMotion.matches) {
+      animation.goToAndPlay(0, true);
+      playing = true;
+    } else {
+      updateAnimation();
+    }
+  });
+  animation.addEventListener('complete', () => {
+    playing = false;
+    animation.goToAndStop(0, true);
+  });
+  animation.addEventListener('data_failed', () => icon.classList.add('is-error'));
+
+  trigger.addEventListener('mouseenter', () => {
     hovering = true;
     updateAnimation();
   });
-  trigger?.addEventListener('mouseleave', () => {
+  trigger.addEventListener('mouseleave', () => {
     hovering = false;
     updateAnimation();
   });
-  trigger?.addEventListener('focusin', () => {
+  trigger.addEventListener('focusin', () => {
     focused = true;
     updateAnimation();
   });
-  trigger?.addEventListener('focusout', (event) => {
+  trigger.addEventListener('focusout', (event) => {
     focused = trigger.contains(event.relatedTarget);
     updateAnimation();
   });
   reducedMotion.addEventListener?.('change', updateAnimation);
-
-  updateAnimation();
 });
 
 document.querySelectorAll('a[href^="http"]').forEach((link) => {

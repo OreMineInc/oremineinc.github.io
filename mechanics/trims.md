@@ -6,7 +6,7 @@ permalink: /mechanics/trims/
 section: mechanics
 ---
 
-# <img class="page-title-icon" src="{{ '/assets/images/astral-shard/shard-15.png' | relative_url }}" alt=""> Отделки брони
+# {% include astral-icon.html model="amethyst" class="page-title-icon" %} Отделки брони
 
 Меню отделок открывается /trims или через карточку «Система отделок» в разделе механик.
 

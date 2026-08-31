@@ -6,7 +6,7 @@ permalink: /mechanics/cases/
 section: mechanics
 ---
 
-# <img class="page-title-icon" src="{{ '/assets/images/astral-shard/shard-17.png' | relative_url }}" alt=""> Кейсы
+# {% include astral-icon.html model="amethyst" class="page-title-icon" %} Кейсы
 
 Меню кейсов позволяет получить ценные ресурсы, внутриигровую валюту, уникальные предметы и донат-привилегии. Открыть интерфейс можно командами `/case`, `/cases` или посетив локацию `/warp case`, а приобрести сами кейсы — на [официальном сайте OreMine](https://oremine.me/).
 

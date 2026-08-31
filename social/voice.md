@@ -6,7 +6,7 @@ permalink: /social/voice/
 section: social
 ---
 
-# <img class="page-title-icon" src="{{ '/assets/images/astral-shard/shard-26.png' | relative_url }}" alt=""> Голосовой чат
+# {% include astral-icon.html model="spinel" class="page-title-icon" %} Голосовой чат
 
 Работа голосового чата на сервере обеспечивается модификацией **Simple Voice Chat**.
 

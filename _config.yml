@@ -4,3 +4,7 @@ lang: ru-RU
 url: "https://wiki.oremine.me"
 markdown: kramdown
 permalink: pretty
+exclude:
+  - compose.yaml
+  - Dockerfile
+  - README.md

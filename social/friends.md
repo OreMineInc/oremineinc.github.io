@@ -6,7 +6,7 @@ permalink: /social/friends/
 section: social
 ---
 
-# <img class="page-title-icon" src="{{ '/assets/images/astral-shard/shard-25.png' | relative_url }}" alt=""> Друзья и репутация
+# {% include astral-icon.html model="spinel" class="page-title-icon" %} Друзья и репутация
 
 Система друзей:
 

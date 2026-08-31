@@ -6,7 +6,7 @@ permalink: /mechanics/claims/
 section: mechanics
 ---
 
-# <img class="page-title-icon" src="{{ '/assets/images/astral-shard/shard-06.png' | relative_url }}" alt=""> Приваты и защита базы
+# {% include astral-icon.html model="amethyst" class="page-title-icon" %} Приваты и защита базы
 
 ## Обычные приваты
 
