@@ -6,7 +6,7 @@ permalink: /mechanics/cases/
 section: mechanics
 ---
 
-<h1>{% include astral-icon.html model="amethyst" class="page-title-icon" %} Кейсы</h1>
+<h1>{% include news-icon.html model="shopping" class="page-title-icon" %} Кейсы</h1>
 
 Меню кейсов позволяет получить ценные ресурсы, внутриигровую валюту, уникальные предметы и донат-привилегии. Открыть интерфейс можно командами `/case`, `/cases` или посетив локацию `/warp case`, а приобрести сами кейсы — на [официальном сайте OreMine](https://oremine.me/).
 

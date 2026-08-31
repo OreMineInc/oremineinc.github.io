@@ -144,7 +144,19 @@
       <span>OreMine <b>Wiki</b></span>
     </a>
     <div class="top-actions">
-      <label class="search"><span>⌕</span><input id="nav-search" type="search" placeholder="Поиск по разделам..." aria-label="Поиск по разделам"><kbd>Ctrl K</kbd></label>
+      <div class="search-wrap" id="search-wrap">
+        <div class="search">
+          <button class="search-trigger" id="search-trigger" type="button" aria-label="Открыть поиск">⌕</button>
+          <input id="nav-search" type="search" placeholder="Найти страницу, команду или механику..." aria-label="Поиск по Wiki" role="combobox" aria-autocomplete="list" aria-controls="search-results" aria-expanded="false" autocomplete="off" spellcheck="false">
+          <button class="search-clear" id="search-clear" type="button" aria-label="Очистить поиск" hidden>×</button>
+          <kbd>Ctrl K</kbd>
+        </div>
+        <div class="search-results" id="search-results" role="listbox" aria-label="Подсказки поиска" hidden>
+          <div class="search-results__head"><strong id="search-results-title">Быстрый доступ</strong><small>↑↓ выбрать · Enter открыть</small></div>
+          <div id="search-results-list"></div>
+          <p class="search-results__empty" id="search-results-empty" role="status" aria-live="polite" hidden></p>
+        </div>
+      </div>
       <button class="menu-button" id="menu-button" type="button" aria-label="Открыть меню">☰</button>
     </div>
   </header>
@@ -161,34 +173,34 @@
         <p class="nav-heading">ИГРОВОЙ ПРОЦЕСС</p>
         <details class="{% if page.section == 'mechanics' %}nav-section-active{% endif %}" {% if page.section == 'mechanics' %}open{% endif %}>
           <summary>{% include astral-icon.html model="amethyst" class="nav-icon" %}Механики</summary>
-          <a href="{{ '/mechanics/' | relative_url }}">Обзор механик</a>
-          <a href="{{ '/mechanics/claims/' | relative_url }}">Приваты и территории</a>
-          <a href="{{ '/mechanics/pvp/' | relative_url }}">PvP и гриферство</a>
-          <a href="{{ '/mechanics/events/' | relative_url }}">События</a>
-          <a href="{{ '/mechanics/quests/' | relative_url }}">Квесты</a>
-          <a href="{{ '/mechanics/smuggler/' | relative_url }}">Контрабандист</a>
-          <a href="{{ '/mechanics/enchants/' | relative_url }}">Зачарования</a>
-          <a href="{{ '/mechanics/potionstack/' | relative_url }}">Баффовар</a>
-          <a href="{{ '/mechanics/crafts/' | relative_url }}">Кастомные крафты</a>
-          <a href="{{ '/mechanics/tops/' | relative_url }}">Топы игроков</a>
-          <a href="{{ '/mechanics/trims/' | relative_url }}">Отделки брони</a>
-          <a href="{{ '/mechanics/duels/' | relative_url }}">Дуэли</a>
-          <a href="{{ '/mechanics/cases/' | relative_url }}">Кейсы</a>
-          <a href="{{ '/mechanics/cosmetics/' | relative_url }}">Косметика</a>
-          <a href="{{ '/mechanics/ether-smith/' | relative_url }}">Эфирный кузнец</a>
-          <a href="{{ '/mechanics/battlepass/' | relative_url }}">BattlePass</a>
+          <a class="{% if page.url == '/mechanics/' %}active{% endif %}" {% if page.url == '/mechanics/' %}aria-current="page"{% endif %} href="{{ '/mechanics/' | relative_url }}">Обзор механик</a>
+          <a class="{% if page.url == '/mechanics/claims/' %}active{% endif %}" {% if page.url == '/mechanics/claims/' %}aria-current="page"{% endif %} href="{{ '/mechanics/claims/' | relative_url }}">Приваты и территории</a>
+          <a class="{% if page.url == '/mechanics/pvp/' %}active{% endif %}" {% if page.url == '/mechanics/pvp/' %}aria-current="page"{% endif %} href="{{ '/mechanics/pvp/' | relative_url }}">PvP и гриферство</a>
+          <a class="{% if page.url == '/mechanics/events/' %}active{% endif %}" {% if page.url == '/mechanics/events/' %}aria-current="page"{% endif %} href="{{ '/mechanics/events/' | relative_url }}">События</a>
+          <a class="{% if page.url == '/mechanics/quests/' %}active{% endif %}" {% if page.url == '/mechanics/quests/' %}aria-current="page"{% endif %} href="{{ '/mechanics/quests/' | relative_url }}">Квесты</a>
+          <a class="{% if page.url == '/mechanics/smuggler/' %}active{% endif %}" {% if page.url == '/mechanics/smuggler/' %}aria-current="page"{% endif %} href="{{ '/mechanics/smuggler/' | relative_url }}">Контрабандист</a>
+          <a class="{% if page.url == '/mechanics/enchants/' %}active{% endif %}" {% if page.url == '/mechanics/enchants/' %}aria-current="page"{% endif %} href="{{ '/mechanics/enchants/' | relative_url }}">Зачарования</a>
+          <a class="{% if page.url == '/mechanics/potionstack/' %}active{% endif %}" {% if page.url == '/mechanics/potionstack/' %}aria-current="page"{% endif %} href="{{ '/mechanics/potionstack/' | relative_url }}">Баффовар</a>
+          <a class="{% if page.url == '/mechanics/crafts/' %}active{% endif %}" {% if page.url == '/mechanics/crafts/' %}aria-current="page"{% endif %} href="{{ '/mechanics/crafts/' | relative_url }}">Кастомные крафты</a>
+          <a class="{% if page.url == '/mechanics/tops/' %}active{% endif %}" {% if page.url == '/mechanics/tops/' %}aria-current="page"{% endif %} href="{{ '/mechanics/tops/' | relative_url }}">Топы игроков</a>
+          <a class="{% if page.url == '/mechanics/trims/' %}active{% endif %}" {% if page.url == '/mechanics/trims/' %}aria-current="page"{% endif %} href="{{ '/mechanics/trims/' | relative_url }}">Отделки брони</a>
+          <a class="{% if page.url == '/mechanics/duels/' %}active{% endif %}" {% if page.url == '/mechanics/duels/' %}aria-current="page"{% endif %} href="{{ '/mechanics/duels/' | relative_url }}">Дуэли</a>
+          <a class="{% if page.url == '/mechanics/cases/' %}active{% endif %}" {% if page.url == '/mechanics/cases/' %}aria-current="page"{% endif %} href="{{ '/mechanics/cases/' | relative_url }}">Кейсы</a>
+          <a class="{% if page.url == '/mechanics/cosmetics/' %}active{% endif %}" {% if page.url == '/mechanics/cosmetics/' %}aria-current="page"{% endif %} href="{{ '/mechanics/cosmetics/' | relative_url }}">Косметика</a>
+          <a class="{% if page.url == '/mechanics/ether-smith/' %}active{% endif %}" {% if page.url == '/mechanics/ether-smith/' %}aria-current="page"{% endif %} href="{{ '/mechanics/ether-smith/' | relative_url }}">Эфирный кузнец</a>
+          <a class="{% if page.url == '/mechanics/battlepass/' %}active{% endif %}" {% if page.url == '/mechanics/battlepass/' %}aria-current="page"{% endif %} href="{{ '/mechanics/battlepass/' | relative_url }}">BattlePass</a>
         </details>
         <details class="{% if page.section == 'earning' %}nav-section-active{% endif %}" {% if page.section == 'earning' %}open{% endif %}>
           <summary>{% include astral-icon.html model="sunstone" class="nav-icon" %}Экономика</summary>
-          <a href="{{ '/earning/' | relative_url }}">Работы и заработок</a>
-          <a href="{{ '/earning/experience/' | relative_url }}">Обмен опыта</a>
-          <a href="{{ '/earning/auction/' | relative_url }}">Аукцион</a>
+          <a class="{% if page.url == '/earning/' %}active{% endif %}" {% if page.url == '/earning/' %}aria-current="page"{% endif %} href="{{ '/earning/' | relative_url }}">Работы и заработок</a>
+          <a class="{% if page.url == '/earning/experience/' %}active{% endif %}" {% if page.url == '/earning/experience/' %}aria-current="page"{% endif %} href="{{ '/earning/experience/' | relative_url }}">Обмен опыта</a>
+          <a class="{% if page.url == '/earning/auction/' %}active{% endif %}" {% if page.url == '/earning/auction/' %}aria-current="page"{% endif %} href="{{ '/earning/auction/' | relative_url }}">Аукцион</a>
         </details>
         <details class="{% if page.section == 'social' %}nav-section-active{% endif %}" {% if page.section == 'social' %}open{% endif %}>
           <summary>{% include astral-icon.html model="spinel" class="nav-icon" %}Сообщество</summary>
-          <a href="{{ '/social/clans/' | relative_url }}">Кланы и команды</a>
-          <a href="{{ '/social/friends/' | relative_url }}">Друзья и репутация</a>
-          <a href="{{ '/social/voice/' | relative_url }}">Голосовой чат</a>
+          <a class="{% if page.url == '/social/clans/' %}active{% endif %}" {% if page.url == '/social/clans/' %}aria-current="page"{% endif %} href="{{ '/social/clans/' | relative_url }}">Кланы и команды</a>
+          <a class="{% if page.url == '/social/friends/' %}active{% endif %}" {% if page.url == '/social/friends/' %}aria-current="page"{% endif %} href="{{ '/social/friends/' | relative_url }}">Друзья и репутация</a>
+          <a class="{% if page.url == '/social/voice/' %}active{% endif %}" {% if page.url == '/social/voice/' %}aria-current="page"{% endif %} href="{{ '/social/voice/' | relative_url }}">Голосовой чат</a>
         </details>
 
         <p class="nav-heading">СПРАВОЧНИК</p>
@@ -196,7 +208,6 @@
         <a class="nav-link {% if page.url contains '/donate/' %}active{% endif %}" href="{{ '/donate/' | relative_url }}">{% include astral-icon.html model="tanzanite" class="nav-icon" %}Донат и ранги</a>
         <a class="nav-link {% if page.url contains '/security/' %}active{% endif %}" href="{{ '/security/' | relative_url }}">{% include astral-icon.html model="bouquet" class="nav-icon" %}Безопасность</a>
         <a class="nav-link {% if page.url contains '/faq/' %}active{% endif %}" href="{{ '/faq/' | relative_url }}">{% include astral-icon.html model="garnet" class="nav-icon" %}FAQ</a>
-        <p class="nav-search-empty" id="nav-search-status" role="status" aria-live="polite" hidden></p>
       </nav>
       <div class="sidebar-footer"><span class="status-dot"></span> OreMine Wiki</div>
     </aside>
@@ -219,6 +230,9 @@
   </div>
   <div class="backdrop" id="backdrop"></div>
   <script src="{{ '/assets/js/vendor/lottie_svg.min.js' | relative_url }}"></script>
+  <script id="search-index" type="application/json">
+    [{% assign search_pages = site.pages | where_exp: 'item', 'item.title' | sort: 'title' %}{% for item in search_pages %}{"title":{{ item.title | jsonify }},"description":{{ item.description | default: '' | strip_html | jsonify }},"url":{{ item.url | relative_url | jsonify }},"section":{{ item.section | default: '' | jsonify }}}{% unless forloop.last %},{% endunless %}{% endfor %}]
+  </script>
   <script src="{{ '/assets/js/main.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
 </body>
 </html>

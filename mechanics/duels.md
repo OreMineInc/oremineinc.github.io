@@ -6,7 +6,7 @@ permalink: /mechanics/duels/
 section: mechanics
 ---
 
-<h1>{% include astral-icon.html model="amethyst" class="page-title-icon" %} Дуэли</h1>
+<h1>{% include news-icon.html model="comet" class="page-title-icon" %} Дуэли</h1>
 
 Дуэли — сражения между игроками на монеты и ресурсы:
 

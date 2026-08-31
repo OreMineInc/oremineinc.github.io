@@ -6,7 +6,7 @@ permalink: /mechanics/smuggler/
 section: mechanics
 ---
 
-<h1>{% include astral-icon.html model="amethyst" class="page-title-icon" %} Контрабандист</h1>
+<h1>{% include news-icon.html model="shopping" class="page-title-icon" %} Контрабандист</h1>
 
 Он появляется три раза в день:
 
