@@ -6,7 +6,7 @@ permalink: /mechanics/events/
 section: mechanics
 ---
 
-# {% include astral-icon.html model="amethyst" class="page-title-icon" %} События и ивенты
+<h1>{% include news-icon.html model="critical" class="page-title-icon" %} События и ивенты</h1>
 
 ## События и активности
 

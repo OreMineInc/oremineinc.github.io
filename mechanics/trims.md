@@ -6,7 +6,7 @@ permalink: /mechanics/trims/
 section: mechanics
 ---
 
-# {% include astral-icon.html model="amethyst" class="page-title-icon" %} Отделки брони
+<h1>{% include news-icon.html model="eyes" class="page-title-icon" %} Отделки брони</h1>
 
 Меню отделок открывается /trims или через карточку «Система отделок» в разделе механик.
 

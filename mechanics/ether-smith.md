@@ -6,7 +6,7 @@ permalink: /mechanics/ether-smith/
 section: mechanics
 ---
 
-# {% include astral-icon.html model="amethyst" class="page-title-icon" %} Эфирный кузнец
+<h1>{% include news-icon.html model="important" class="page-title-icon" %} Эфирный кузнец</h1>
 
 У NPC «Эфирный кузнец» доступны две уникальные механики для работы с вашей экипировкой.
 

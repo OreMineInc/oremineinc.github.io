@@ -6,7 +6,7 @@ permalink: /mechanics/quests/
 section: mechanics
 ---
 
-# {% include astral-icon.html model="amethyst" class="page-title-icon" %} Квесты и специализации
+<h1>{% include news-icon.html model="question" class="page-title-icon" %} Квесты и специализации</h1>
 
 Квесты
 

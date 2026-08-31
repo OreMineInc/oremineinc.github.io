@@ -6,7 +6,7 @@ permalink: /commands/
 section: reference
 ---
 
-# {% include astral-icon.html model="black-diamond" class="page-title-icon" %} Команды сервера
+<h1>{% include astral-icon.html model="black-diamond" class="page-title-icon" %} Команды сервера</h1>
 
 ## Структура меню /info
 
@@ -27,7 +27,7 @@ section: reference
 | `/shop`, `/seller`, `/ah` | Магазин, скупщик и аукцион |
 | `/report <ник> <причина>` | Подать жалобу на игрока |
 
-> ℹ️ Неизвестная команда? Используйте `/help`, проверьте `/info` или обратитесь к администрации.
+> {% include news-icon.html model="question" class="inline-emoji" %} Неизвестная команда? Используйте `/help`, проверьте `/info` или обратитесь к администрации.
 
 ## Сводная таблица команд
 

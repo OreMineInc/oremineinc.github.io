@@ -135,7 +135,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}?v={{ site.time | date: '%s' }}">
 </head>
 <body>
   <header class="topbar">
@@ -152,7 +152,7 @@
   <div class="shell">
     <aside class="sidebar" id="sidebar">
       <nav id="navigation" aria-label="Разделы Wiki">
-        <a class="nav-link {% if page.url == '/' %}active{% endif %}" href="{{ '/' | relative_url }}">{% include astral-icon.html model="sapphire" class="nav-icon" %}Home</a>
+        <a class="nav-link {% if page.url == '/' %}active{% endif %}" href="{{ '/' | relative_url }}">{% include astral-icon.html model="sapphire" class="nav-icon" %}Главная страница</a>
         <p class="nav-heading">ОСНОВЫ</p>
         <a class="nav-link {% if page.url contains '/getting-started/' %}active{% endif %}" href="{{ '/getting-started/' | relative_url }}">{% include astral-icon.html model="aquamarine" class="nav-icon" %}Начало игры</a>
         <a class="nav-link {% if page.url contains '/rules/' %}active{% endif %}" href="{{ '/rules/' | relative_url }}">{% include astral-icon.html model="citrine" class="nav-icon" %}Правила сервера</a>
@@ -196,6 +196,7 @@
         <a class="nav-link {% if page.url contains '/donate/' %}active{% endif %}" href="{{ '/donate/' | relative_url }}">{% include astral-icon.html model="tanzanite" class="nav-icon" %}Донат и ранги</a>
         <a class="nav-link {% if page.url contains '/security/' %}active{% endif %}" href="{{ '/security/' | relative_url }}">{% include astral-icon.html model="bouquet" class="nav-icon" %}Безопасность</a>
         <a class="nav-link {% if page.url contains '/faq/' %}active{% endif %}" href="{{ '/faq/' | relative_url }}">{% include astral-icon.html model="garnet" class="nav-icon" %}FAQ</a>
+        <p class="nav-search-empty" id="nav-search-status" role="status" aria-live="polite" hidden></p>
       </nav>
       <div class="sidebar-footer"><span class="status-dot"></span> OreMine Wiki</div>
     </aside>
@@ -218,6 +219,6 @@
   </div>
   <div class="backdrop" id="backdrop"></div>
   <script src="{{ '/assets/js/vendor/lottie_svg.min.js' | relative_url }}"></script>
-  <script src="{{ '/assets/js/main.js' | relative_url }}"></script>
+  <script src="{{ '/assets/js/main.js' | relative_url }}?v={{ site.time | date: '%s' }}"></script>
 </body>
 </html>

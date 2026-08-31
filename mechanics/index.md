@@ -6,7 +6,7 @@ permalink: /mechanics/
 section: mechanics
 ---
 
-# {% include astral-icon.html model="amethyst" class="page-title-icon" %} Механики
+<h1>{% include astral-icon.html model="amethyst" class="page-title-icon" %} Механики</h1>
 
 В этом разделе собраны особенности игрового процесса OreMine: от защиты базы и PvP до уникальных зачарований, крафтов и отделок брони.
 

@@ -6,7 +6,7 @@ permalink: /social/friends/
 section: social
 ---
 
-# {% include astral-icon.html model="spinel" class="page-title-icon" %} Друзья и репутация
+<h1>{% include astral-icon.html model="spinel" class="page-title-icon" %} Друзья и репутация</h1>
 
 Система друзей:
 

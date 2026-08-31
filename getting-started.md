@@ -6,7 +6,7 @@ permalink: /getting-started/
 section: basics
 ---
 
-# {% include astral-icon.html model="aquamarine" class="page-title-icon" %} Начало игры
+<h1>{% include astral-icon.html model="aquamarine" class="page-title-icon" %} Начало игры</h1>
 
 ## Начало игры
 

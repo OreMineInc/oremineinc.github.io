@@ -6,7 +6,7 @@ permalink: /survival/
 section: basics
 ---
 
-# {% include astral-icon.html model="emerald" class="page-title-icon" %} Выживание и ресурсы
+<h1>{% include astral-icon.html model="emerald" class="page-title-icon" %} Выживание и ресурсы</h1>
 
 ## Прогресс
 

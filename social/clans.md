@@ -6,7 +6,7 @@ permalink: /social/clans/
 section: social
 ---
 
-# {% include astral-icon.html model="spinel" class="page-title-icon" %} Кланы и команды
+<h1>{% include astral-icon.html model="spinel" class="page-title-icon" %} Кланы и команды</h1>
 
 Клан помогает защищать базу, развивать общую экономику и участвовать в войнах/событиях. Точные команды зависят от плагина: часто используются /clan, /clan create, /clan invite, /clan leave
 

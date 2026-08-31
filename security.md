@@ -6,7 +6,7 @@ permalink: /security/
 section: reference
 ---
 
-# {% include astral-icon.html model="bouquet" class="page-title-icon" %} Безопасность и поддержка
+<h1>{% include astral-icon.html model="bouquet" class="page-title-icon" %} Безопасность и поддержка</h1>
 
 ## Безопасность аккаунта
 

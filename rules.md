@@ -6,7 +6,7 @@ permalink: /rules/
 section: basics
 ---
 
-# {% include astral-icon.html model="citrine" class="page-title-icon" %} Правила сервера
+<h1>{% include astral-icon.html model="citrine" class="page-title-icon" %} Правила сервера</h1>
 
 Сервер допускает конкуренцию, PvP и рейды только в рамках правил. Незнание правил не освобождает от наказания.
 

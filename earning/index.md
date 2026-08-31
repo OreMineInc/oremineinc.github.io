@@ -6,7 +6,7 @@ permalink: /earning/
 section: earning
 ---
 
-# {% include astral-icon.html model="sunstone" class="page-title-icon" %} Экономика и заработок
+<h1>{% include astral-icon.html model="sunstone" class="page-title-icon" %} Экономика и заработок</h1>
 
 ## Экономика и торговля
 

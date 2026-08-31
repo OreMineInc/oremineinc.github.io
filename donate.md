@@ -6,7 +6,7 @@ permalink: /donate/
 section: reference
 ---
 
-# {% include astral-icon.html model="tanzanite" class="page-title-icon" %} Донат и услуги
+<h1>{% include astral-icon.html model="tanzanite" class="page-title-icon" %} Донат и услуги</h1>
 
 Донат — это добровольный способ поддержать развитие OreMine и получить дополнительные игровые возможности. Актуальные привилегии, кейсы, гемы, услуги, цены и подробное описание каждого предложения собраны в официальном магазине проекта.
 

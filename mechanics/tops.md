@@ -6,7 +6,7 @@ permalink: /mechanics/tops/
 section: mechanics
 ---
 
-# {% include astral-icon.html model="amethyst" class="page-title-icon" %} Топы игроков
+<h1>{% include astral-icon.html model="amethyst" class="page-title-icon" %} Топы игроков</h1>
 
 Рейтинг находится на /warp tops. Игроки могут отображаться по убийствам, балансу, времени онлайн и очкам кланов.
 

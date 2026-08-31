@@ -6,7 +6,7 @@ permalink: /mechanics/enchants/
 section: mechanics
 ---
 
-# {% include astral-icon.html model="amethyst" class="page-title-icon" %} Кастомные зачарования
+<h1>{% include news-icon.html model="urgent" class="page-title-icon" %} Кастомные зачарования</h1>
 
 Кастомные зачарования — это уникальная система, значительно расширяющая привычный игровой процесс Minecraft.
 

@@ -3,6 +3,8 @@ const sidebar = document.querySelector('#sidebar');
 const backdrop = document.querySelector('#backdrop');
 const menuButton = document.querySelector('#menu-button');
 const search = document.querySelector('#nav-search');
+const navigation = document.querySelector('#navigation');
+const searchStatus = document.querySelector('#nav-search-status');
 
 const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
@@ -98,23 +100,89 @@ function toggleMenu(force) {
 menuButton?.addEventListener('click', () => toggleMenu());
 backdrop?.addEventListener('click', () => toggleMenu(false));
 
+const navigationGroups = [...(navigation?.querySelectorAll(':scope > details') || [])];
+const initialGroupState = new Map(navigationGroups.map((group) => [group, group.open]));
+
+const normalizeSearchText = (value) => value
+  .toLocaleLowerCase('ru-RU')
+  .replaceAll('ё', 'е')
+  .replace(/\s+/g, ' ')
+  .trim();
+
+const matchesSearch = (text, terms) => {
+  const normalizedText = normalizeSearchText(text);
+  return terms.every((term) => normalizedText.includes(term));
+};
+
+const updateNavigationSearch = () => {
+  if (!navigation || !search) return;
+
+  const query = normalizeSearchText(search.value);
+  const terms = query ? query.split(' ') : [];
+  let visibleLinkCount = 0;
+
+  [...navigation.children].filter((item) => item.tagName === 'A').forEach((link) => {
+    const visible = !query || matchesSearch(link.textContent, terms);
+    link.hidden = !visible;
+    if (visible) visibleLinkCount += 1;
+  });
+
+  navigationGroups.forEach((group) => {
+    const summary = group.querySelector(':scope > summary');
+    const links = [...group.querySelectorAll(':scope > a')];
+    const summaryMatches = Boolean(query && summary && matchesSearch(summary.textContent, terms));
+    let matchingChildren = 0;
+
+    links.forEach((link) => {
+      const visible = !query || summaryMatches || matchesSearch(link.textContent, terms);
+      link.hidden = !visible;
+      if (visible) matchingChildren += 1;
+    });
+
+    const visible = !query || summaryMatches || matchingChildren > 0;
+    group.hidden = !visible;
+    group.open = query ? visible : initialGroupState.get(group);
+    if (visible) visibleLinkCount += matchingChildren;
+  });
+
+  navigation.querySelectorAll(':scope > .nav-heading').forEach((heading) => {
+    let item = heading.nextElementSibling;
+    let hasVisibleItems = false;
+
+    while (item && !item.matches('.nav-heading')) {
+      if (item.matches('a, details') && !item.hidden) hasVisibleItems = true;
+      item = item.nextElementSibling;
+    }
+
+    heading.hidden = Boolean(query) && !hasVisibleItems;
+  });
+
+  if (searchStatus) {
+    const hasNoResults = Boolean(query) && visibleLinkCount === 0;
+    searchStatus.hidden = !hasNoResults;
+    searchStatus.textContent = hasNoResults
+      ? `По запросу «${search.value.trim()}» ничего не найдено.`
+      : '';
+  }
+};
+
 document.addEventListener('keydown', (event) => {
   if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === 'k') {
     event.preventDefault();
     search?.focus();
   }
-  if (event.key === 'Escape') toggleMenu(false);
+  if (event.key === 'Escape') {
+    if (search?.value) {
+      search.value = '';
+      updateNavigationSearch();
+      search.focus();
+    } else {
+      toggleMenu(false);
+    }
+  }
 });
 
-search?.addEventListener('input', () => {
-  const query = search.value.trim().toLowerCase();
-  document.querySelectorAll('#navigation a').forEach((link) => {
-    link.style.display = !query || link.textContent.toLowerCase().includes(query) ? '' : 'none';
-  });
-  document.querySelectorAll('#navigation details').forEach((group) => {
-    if (query) group.open = true;
-  });
-});
+search?.addEventListener('input', updateNavigationSearch);
 
 const savedTheme = localStorage.getItem('oremine-theme');
 if (savedTheme) root.dataset.theme = savedTheme;

@@ -6,7 +6,7 @@ permalink: /faq/
 section: reference
 ---
 
-# {% include astral-icon.html model="garnet" class="page-title-icon" %} FAQ и помощь
+<h1>{% include astral-icon.html model="garnet" class="page-title-icon" %} FAQ и помощь</h1>
 
 Нужна помощь или хотите связаться с сообществом? Используйте только официальные каналы OreMine.
 

@@ -6,7 +6,7 @@ permalink: /mechanics/claims/
 section: mechanics
 ---
 
-# {% include astral-icon.html model="amethyst" class="page-title-icon" %} Приваты и защита базы
+<h1>{% include news-icon.html model="ban" class="page-title-icon" %} Приваты и защита базы</h1>
 
 ## Обычные приваты
 

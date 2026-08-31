@@ -6,7 +6,7 @@ permalink: /mechanics/battlepass/
 section: mechanics
 ---
 
-# {% include astral-icon.html model="amethyst" class="page-title-icon" %} BattlePass
+<h1>{% include news-icon.html model="urgent" class="page-title-icon" %} BattlePass</h1>
 
 Боевой Пропуск (Батлпасс)
 

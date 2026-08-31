@@ -6,7 +6,7 @@ permalink: /mechanics/cosmetics/
 section: mechanics
 ---
 
-# {% include astral-icon.html model="amethyst" class="page-title-icon" %} Косметика
+<h1>{% include news-icon.html model="smile" class="page-title-icon" %} Косметика</h1>
 
 ## Валюта («Космики»)
 

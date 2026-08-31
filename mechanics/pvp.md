@@ -6,7 +6,7 @@ permalink: /mechanics/pvp/
 section: mechanics
 ---
 
-# {% include astral-icon.html model="amethyst" class="page-title-icon" %} PvP, гриферство и рейды
+<h1>{% include news-icon.html model="comet" class="page-title-icon" %} PvP, гриферство и рейды</h1>
 
 ## PvP
 
