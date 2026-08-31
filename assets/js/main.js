@@ -4,6 +4,92 @@ const backdrop = document.querySelector('#backdrop');
 const menuButton = document.querySelector('#menu-button');
 const search = document.querySelector('#nav-search');
 
+const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+document.querySelectorAll('#navigation .nav-icon[data-lottie-path]').forEach((icon) => {
+  const trigger = icon.closest('.nav-link, summary');
+  const animationHost = icon.querySelector('.nav-icon__animated');
+  const isCurrentSection = () => trigger?.classList.contains('active')
+    || trigger?.parentElement?.classList.contains('nav-section-active');
+  let animation;
+  let loading = false;
+  let playing = false;
+  let hovering = false;
+  let focused = false;
+
+  const shouldAnimate = () => !reducedMotion.matches && (isCurrentSection() || hovering || focused);
+
+  const updateAnimation = () => {
+    const play = shouldAnimate();
+    icon.classList.toggle('is-animating', play);
+
+    if (!play) {
+      if (playing) animation?.stop();
+      playing = false;
+      return;
+    }
+
+    if (animation) {
+      if (!playing) {
+        animation.goToAndPlay(0, true);
+        playing = true;
+      }
+      return;
+    }
+
+    if (loading || !animationHost || typeof window.lottie?.loadAnimation !== 'function') return;
+    loading = true;
+    animation = window.lottie.loadAnimation({
+      container: animationHost,
+      renderer: 'svg',
+      loop: true,
+      autoplay: false,
+      path: icon.dataset.lottiePath,
+      rendererSettings: {
+        preserveAspectRatio: 'xMidYMid meet',
+        progressiveLoad: true,
+        focusable: false,
+      },
+    });
+
+    animation.addEventListener('DOMLoaded', () => {
+      loading = false;
+      icon.classList.add('is-ready');
+      if (shouldAnimate()) {
+        animation.goToAndPlay(0, true);
+        playing = true;
+      }
+    });
+
+    animation.addEventListener('data_failed', () => {
+      loading = false;
+      playing = false;
+      animation = undefined;
+      icon.classList.remove('is-ready');
+    });
+  };
+
+  trigger?.addEventListener('mouseenter', () => {
+    hovering = true;
+    updateAnimation();
+  });
+  trigger?.addEventListener('mouseleave', () => {
+    hovering = false;
+    updateAnimation();
+  });
+  trigger?.addEventListener('focusin', () => {
+    focused = true;
+    updateAnimation();
+  });
+  trigger?.addEventListener('focusout', (event) => {
+    focused = trigger.contains(event.relatedTarget);
+    updateAnimation();
+  });
+  reducedMotion.addEventListener?.('change', updateAnimation);
+
+  updateAnimation();
+});
+
 document.querySelectorAll('a[href^="http"]').forEach((link) => {
   const target = new URL(link.href, window.location.href);
   if (target.origin !== window.location.origin) {
