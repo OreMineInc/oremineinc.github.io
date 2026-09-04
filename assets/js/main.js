@@ -141,6 +141,7 @@ const searchAliases = {
   '/social/clans/': 'клан кланы команда команды clan',
   '/social/friends/': 'друг друзья friend репутация отношения',
   '/social/voice/': 'голос голосовой чат войс voice discord дискорд',
+  '/social/staff/': 'персонал команда проекта медиа партнер партнёр ютуб youtube shorts tiktok тикток хелпер helper творческий отдел тестер заявка анкета',
   '/commands/': 'команды помощь help rtp sethome home warp jobs menu info телепорт',
   '/donate/': 'донат услуги ранг ранги привилегия привилегии купить магазин',
   '/security/': 'безопасность поддержка взлом мошенник скам telegram discord помощь',
