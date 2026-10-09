@@ -1,0 +1,75 @@
+---
+layout: default
+title: Обзор косметики
+description: "Каталог косметики OreMine с ценами: примерка брони на игроке, просмотр оружия и инструментов в руке и загрузка своего скина."
+permalink: /mechanics/cosmetics/preview/
+section: mechanics
+cosmetic_viewer: true
+---
+<h1>{% include news-icon.html model="smile" class="page-title-icon" %} Обзор косметики</h1>
+<p class="cosmetic-intro">Соберите свой образ: выберите броню, добавьте оружие и посмотрите на сочетание со всех сторон. Косметика приобретается в игре через <code>/cosmetic</code> на <strong>30 дней</strong>.</p>
+<div id="cosmetic-app" data-assets="{{ '/assets/cosmetics/' | relative_url }}">
+  <div class="cosmetic-workbench">
+    <section class="cosmetic-fitting" aria-label="Примерочная">
+      <div class="cosmetic-view-tabs" role="group" aria-label="Режим просмотра">
+        <button type="button" data-view="player" aria-pressed="true">На игроке</button>
+        <button type="button" data-view="hand" aria-pressed="false">В руке · 1-е лицо</button>
+        <button type="button" data-view="item" aria-pressed="false">Предмет</button>
+      </div>
+      <div class="cosmetic-stage" id="cosmetic-stage">
+        <canvas id="cosmetic-canvas" aria-label="Трёхмерная примерка косметики. Перетаскивайте мышью для поворота, используйте колесо для приближения."></canvas>
+        <div class="cosmetic-stage-label" id="cosmetic-stage-label">Примерочная</div>
+        <div class="cosmetic-status" id="cosmetic-status" role="status" aria-live="polite">Загружаем каталог…</div>
+        <div class="cosmetic-crosshair" id="cosmetic-crosshair" hidden>+</div>
+        <div class="cosmetic-camera-tools">
+          <button type="button" id="cosmetic-reset-camera" title="Вернуть исходный ракурс">Сбросить ракурс</button>
+          <button type="button" id="cosmetic-rotate" aria-pressed="false">Вращать</button>
+        </div>
+      </div>
+      <p class="cosmetic-hint">Перетаскивайте, чтобы повернуть · колесо или жест двумя пальцами — приблизить.</p>
+      <div class="cosmetic-skin-controls">
+        <label class="cosmetic-upload">Загрузить свой скин <input type="file" id="cosmetic-skin" accept="image/png"></label>
+        <label class="cosmetic-slim"><input type="checkbox" id="cosmetic-slim"> Тонкие руки (Alex)</label>
+        <button type="button" id="cosmetic-reset-skin">Сбросить скин</button>
+      </div>
+      <p class="cosmetic-skin-note" id="cosmetic-skin-note" role="status">PNG 64 × 64 или 64 × 32. Скин остаётся в вашем браузере.</p>
+      <div class="cosmetic-loadout-heading"><strong>Ваша экипировка</strong><button type="button" id="cosmetic-clear">Снять всё</button></div>
+      <div class="cosmetic-loadout" id="cosmetic-loadout"></div>
+    </section>
+    <section class="cosmetic-selection" aria-label="Выбранная косметика">
+      <span class="cosmetic-eyebrow" id="cosmetic-selected-pack">Выберите предмет</span>
+      <h2 id="cosmetic-selected-name">Соберите образ</h2>
+      <div class="cosmetic-selected-tags"><span id="cosmetic-selected-kind"></span><span id="cosmetic-selected-price"></span><span>30 дней</span></div>
+      <p id="cosmetic-selected-note">Нажмите на предмет в каталоге, чтобы примерить его.</p>
+      <div class="cosmetic-selected-actions">
+        <button type="button" id="cosmetic-equip-pack">Примерить броню набора</button>
+        <label>Держать предмет <select id="cosmetic-hand"><option value="right">В правой руке</option><option value="left">В левой руке</option></select></label>
+      </div>
+      <div class="cosmetic-pack-price" id="cosmetic-pack-price"></div>
+      <a href="{{ '/mechanics/cosmetics/' | relative_url }}" class="cosmetic-rules-link">Как купить и применить скин →</a>
+      <p class="cosmetic-preview-note">Модели и текстуры взяты из ресурс-пака сервера. Освещение, анимации и положение камеры в игре могут отличаться.</p>
+    </section>
+  </div>
+  <section class="cosmetic-catalog" aria-label="Каталог косметики">
+    <div class="cosmetic-catalog-heading"><h2>Каталог</h2><span id="cosmetic-count" role="status" aria-live="polite"></span></div>
+    <div class="cosmetic-filters">
+      <label>Поиск <input type="search" id="cosmetic-search" placeholder="Название, набор или тип предмета…"></label>
+      <label>Набор <select id="cosmetic-pack"><option value="">Все наборы</option></select></label>
+      <label>Тип <select id="cosmetic-kind"><option value="">Все предметы</option></select></label>
+      <label>Сортировка <select id="cosmetic-sort"><option value="pack">По набору</option><option value="price-asc">Сначала дешевле</option><option value="price-desc">Сначала дороже</option><option value="name">По названию</option></select></label>
+    </div>
+    <div class="cosmetic-category-tabs" role="group" aria-label="Категории">
+      <button type="button" data-category="all" aria-pressed="true">Все</button>
+      <button type="button" data-category="armor" aria-pressed="false">Броня</button>
+      <button type="button" data-category="weapon" aria-pressed="false">Оружие</button>
+      <button type="button" data-category="tools" aria-pressed="false">Инструменты</button>
+      <button type="button" data-category="ranged" aria-pressed="false">Дальний бой</button>
+    </div>
+    <div class="cosmetic-grid" id="cosmetic-grid"></div>
+    <p id="cosmetic-empty" hidden>Ничего не найдено. Попробуйте изменить запрос или фильтры.</p>
+    <button type="button" id="cosmetic-more" hidden>Показать ещё</button>
+  </section>
+  <noscript>Для 3D-примерки включите JavaScript в браузере.</noscript>
+</div>
+<script type="importmap">{"imports":{"three":"{{ '/assets/js/vendor/three.module.min.js' | relative_url }}"}}</script>
+<script type="module" src="{{ '/assets/js/cosmetics.js' | relative_url }}"></script>

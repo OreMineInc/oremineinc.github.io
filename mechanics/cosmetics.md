@@ -8,6 +8,10 @@ section: mechanics
 
 <h1>{% include news-icon.html model="smile" class="page-title-icon" %} Косметика</h1>
 
+<div class="action-links">
+  <a class="primary-button" href="{{ '/mechanics/cosmetics/preview/' | relative_url }}">Обзор и примерка косметики <span>→</span></a>
+</div>
+
 ## Валюта («Космики»)
 
 Для покупки косметических предметов на сервере используется специальная валюта — космики.

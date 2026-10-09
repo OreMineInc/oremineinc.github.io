@@ -1,0 +1,15 @@
+{
+  "items": 446,
+  "packs": 50,
+  "available": 446,
+  "copiedTextures": 594,
+  "recoveredItems": [
+    "plny_eternal_bones_set_axe",
+    "shadowsteel_axe"
+  ],
+  "recoveredModels": [
+    "plny_eternal_bones_set:axe",
+    "shadowsteelset:axe"
+  ],
+  "issues": []
+}

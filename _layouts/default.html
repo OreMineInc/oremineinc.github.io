@@ -136,8 +136,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}?v={{ site.time | date: '%s' }}">
+  {% if page.cosmetic_viewer %}<link rel="stylesheet" href="{{ '/assets/css/cosmetics.css' | relative_url }}">{% endif %}
 </head>
-<body>
+<body{% if page.cosmetic_viewer %} class="cosmetic-viewer-page"{% endif %}>
   <header class="topbar">
     <a class="brand" href="{{ '/' | relative_url }}" aria-label="OreMine Wiki — главная">
       <span class="brand-mark"><img src="{{ '/assets/images/logo-oremine.svg' | relative_url }}" alt="" width="24" height="34"></span>
@@ -187,6 +188,7 @@
           <a class="{% if page.url == '/mechanics/duels/' %}active{% endif %}" {% if page.url == '/mechanics/duels/' %}aria-current="page"{% endif %} href="{{ '/mechanics/duels/' | relative_url }}">Дуэли</a>
           <a class="{% if page.url == '/mechanics/cases/' %}active{% endif %}" {% if page.url == '/mechanics/cases/' %}aria-current="page"{% endif %} href="{{ '/mechanics/cases/' | relative_url }}">Кейсы</a>
           <a class="{% if page.url == '/mechanics/cosmetics/' %}active{% endif %}" {% if page.url == '/mechanics/cosmetics/' %}aria-current="page"{% endif %} href="{{ '/mechanics/cosmetics/' | relative_url }}">Косметика</a>
+          <a class="{% if page.url == '/mechanics/cosmetics/preview/' %}active{% endif %}" {% if page.url == '/mechanics/cosmetics/preview/' %}aria-current="page"{% endif %} href="{{ '/mechanics/cosmetics/preview/' | relative_url }}">Обзор косметики</a>
           <a class="{% if page.url == '/mechanics/ether-smith/' %}active{% endif %}" {% if page.url == '/mechanics/ether-smith/' %}aria-current="page"{% endif %} href="{{ '/mechanics/ether-smith/' | relative_url }}">Эфирный кузнец</a>
           <a class="{% if page.url == '/mechanics/battlepass/' %}active{% endif %}" {% if page.url == '/mechanics/battlepass/' %}aria-current="page"{% endif %} href="{{ '/mechanics/battlepass/' | relative_url }}">BattlePass</a>
         </details>

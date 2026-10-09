@@ -133,6 +133,7 @@ const searchAliases = {
   '/mechanics/duels/': 'дуэль дуэли duel бой ставки',
   '/mechanics/cases/': 'кейс кейсы case cases коробки награды купить',
   '/mechanics/cosmetics/': 'косметика скины космики внешний вид',
+  '/mechanics/cosmetics/preview/': 'обзор косметики примерка 3d броня оружие скин игрок предмет рука наборы цены',
   '/mechanics/ether-smith/': 'эфирный кузнец чары очистка предметы',
   '/mechanics/battlepass/': 'battlepass battle pass батлпасс боевой пропуск xp опыт уровни награды',
   '/earning/': 'экономика заработок работа работы jobs деньги монеты баланс',

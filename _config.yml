@@ -12,3 +12,4 @@ exclude:
   - compose.yaml
   - Dockerfile
   - README.md
+  - tools
