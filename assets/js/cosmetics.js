@@ -21,7 +21,7 @@ const thumbnails = new Map();
 const status = message => { $('status').textContent = message; $('status').hidden = !message; };
 const normalize = value => value.toLowerCase().replaceAll('ё', 'е').trim();
 const packName = item => catalog.packs[item.pack]?.name || item.pack;
-const canWear = item => Boolean(item.helmetModel || item.equipment?.[item.kind === 'LEGGINGS' ? 'humanoid_leggings' : 'humanoid']?.length);
+const canWear = item => Boolean(item.helmetModel || item.wearModel || item.equipment?.[item.kind === 'LEGGINGS' ? 'humanoid_leggings' : 'humanoid']?.length);
 const packMembers = id => catalog.items.filter(item => item.pack === id);
 const packPrice = members => Math.floor(members.reduce((sum, item) => sum + item.price, 0) * (1 - catalog.packDiscount / 100));
 
@@ -178,8 +178,8 @@ function resetCamera() {
 
 async function addArmor(avatar, entry) {
   const parts = avatar.userData.parts;
-  if (entry.helmetModel) {
-    const helmet = await library.item(entry); applyDisplay(helmet, 'head');
+  if (entry.helmetModel || entry.wearModel) {
+    const helmet = await library.item(entry.wearModel ? { ...entry, model: entry.wearModel } : entry); applyDisplay(helmet, 'head');
     const anchor = new THREE.Group(); anchor.scale.setScalar(.625); anchor.add(helmet);
     parts.head.add(anchor);
     return;
@@ -189,7 +189,12 @@ async function addArmor(avatar, entry) {
   for (const layer of layers) {
     const tex = await library.texture(layer.texture);
     const add = (part, w, h, d, x, y, inflate, mirror = false) => parts[part].add(playerBox(w, h, d, x, y, tex, inflate, mirror));
-    if (entry.kind === 'HELMET') add('head', 8, 8, 8, 0, 0, 1);
+    if (entry.kind === 'HELMET') {
+      add('head', 8, 8, 8, 0, 0, 1);
+      // Humanoid equipment may put crowns/masks in the hat UVs, not the base head.
+      // Keep both shells: Wither and Zero Armor 09/10 use the outer head layer.
+      add('head', 8, 8, 8, 32, 0, 1.5);
+    }
     if (entry.kind === 'CHESTPLATE') {
       add('body', 8, 12, 4, 16, 16, 1);
       add('rightArm', 4, 12, 4, 40, 16, 1);

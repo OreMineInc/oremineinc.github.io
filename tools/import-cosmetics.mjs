@@ -152,8 +152,20 @@ const items = skins.map((skin) => {
   const equippable = def.Components?.equippable;
   if (equippable?.asset_id) entry.equipment = equipment(equippable.asset_id);
   else if (def.trim_pattern) entry.equipment = equipment(def.trim_pattern);
+  // Some packs keep the inventory armor item separate from the wearable 3D head.
+  // Use Dark Loyal's supplied HEAD model rather than its flat inventory model,
+  // while retaining the shop item ID, price and inventory model unchanged.
+  if (skin.kind === 'HELMET' && skin.nx_id.endsWith('_armor_helmet')) {
+    const headId = skin.nx_id.replace(/_armor_helmet$/, '_helmet');
+    const headDefinition = definitions[headId];
+    const headRaw = headDefinition?.Components?.equippable?.slot === 'HEAD' && headDefinition.Pack?.model ? model(headDefinition.Pack.model) : null;
+    if (headRaw?.elements?.length) {
+      entry.wearModel = `models/${headId}_worn.json`;
+      fs.writeFileSync(path.join(output, entry.wearModel), JSON.stringify(normalizedModel(headRaw)));
+    }
+  }
   entry.helmetModel = skin.kind === 'HELMET' && Boolean(raw?.elements?.length) && !entry.equipment?.humanoid?.length;
-  if (['CHESTPLATE', 'LEGGINGS', 'BOOTS', 'HELMET'].includes(skin.kind) && !entry.helmetModel && !entry.equipment?.humanoid?.length) {
+  if (['CHESTPLATE', 'LEGGINGS', 'BOOTS', 'HELMET'].includes(skin.kind) && !entry.helmetModel && !entry.wearModel && !entry.equipment?.humanoid?.length) {
     issues.push(`Missing wearable equipment: ${skin.nx_id}`);
   }
   return entry;
