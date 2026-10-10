@@ -12,7 +12,14 @@ const categories = { armor: [...armorKinds, 'SHIELD'], weapon: ['SWORD', 'AXE', 
 const slots = { HELMET: 'Шлем', CHESTPLATE: 'Нагрудник', LEGGINGS: 'Поножи', BOOTS: 'Ботинки', right: 'Правая рука', left: 'Левая рука' };
 const loadout = Object.fromEntries(Object.keys(slots).map(key => [key, null]));
 const money = number => new Intl.NumberFormat('ru-RU').format(number);
-let catalog, selected, skin, view = 'player', category = 'all', limit = 24;
+let catalog, selected, skin, view = 'player', category = 'packs', limit = 24;
+let catalogLayout = 'gallery';
+const catalogLayouts = {
+  gallery: { title: 'Наборы косметики', note: 'Сравните образы и откройте набор, чтобы примерить броню, меч и щит' },
+  list: { title: 'Каталог наборов', note: 'Найдите набор по названию или цене. Откройте его предметы для примерки' },
+  focus: { title: 'Выберите набор', note: 'Выберите набор в списке. Примерка заменит броню и предметы в обеих руках' },
+};
+const layoutStorageKey = 'oremine-cosmetic-layout';
 let browsingSlot = null, savedLoadout = null, pendingHandItem = null, openedPack = null;
 let skinRequest = 0, skinController = null;
 let renderer, scene, camera, controls, content, player, generation = 0, ready = false;
@@ -24,6 +31,58 @@ const packName = item => catalog.packs[item.pack]?.name || item.pack;
 const canWear = item => Boolean(item.helmetModel || item.wearModel || item.equipment?.[item.kind === 'LEGGINGS' ? 'humanoid_leggings' : 'humanoid']?.length);
 const packMembers = id => catalog.items.filter(item => item.pack === id);
 const packPrice = members => Math.floor(members.reduce((sum, item) => sum + item.price, 0) * (1 - catalog.packDiscount / 100));
+
+function updateCatalogLayout() {
+  app.dataset.catalogLayout = catalogLayout;
+  app.querySelectorAll('button[data-catalog-layout]').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.catalogLayout === catalogLayout)));
+  $('layout-note').textContent = catalogLayouts[catalogLayout].note;
+  $('catalog-title').textContent = category === 'packs' ? catalogLayouts[catalogLayout].title : 'Каталог косметики';
+  $('pack-nav').hidden = catalogLayout !== 'focus';
+}
+
+function setCatalogLayout(next, persist = true) {
+  if (!Object.hasOwn(catalogLayouts, next)) return;
+  catalogLayout = next; updateCatalogLayout();
+  // Changing layout only reflows the existing DOM: no model, equipment or filters reset.
+  if (persist) {
+    try { localStorage.setItem(layoutStorageKey, next); } catch { /* Storage may be disabled. */ }
+    const url = new URL(location.href); url.searchParams.set('layout', next);
+    history.replaceState(history.state, '', url);
+  }
+}
+
+function restoreCatalogLayout() {
+  const requested = new URLSearchParams(location.search).get('layout');
+  let saved;
+  try { saved = localStorage.getItem(layoutStorageKey); } catch { /* Use the default. */ }
+  setCatalogLayout(Object.hasOwn(catalogLayouts, requested) ? requested : Object.hasOwn(catalogLayouts, saved) ? saved : 'gallery', false);
+}
+
+function buildPackNavigation() {
+  for (const [id, pack] of Object.entries(catalog.packs).sort((a, b) => a[1].name.localeCompare(b[1].name, 'ru', { numeric: true }))) {
+    const button = document.createElement('button'); button.type = 'button'; button.className = 'cosmetic-pack-link'; button.dataset.pack = id;
+    const name = document.createElement('span'); name.textContent = pack.name;
+    const count = document.createElement('small'); count.textContent = packMembers(id).length; count.setAttribute('aria-hidden', 'true');
+    button.setAttribute('aria-label', `Открыть набор ${pack.name}`);
+    button.append(name, count); button.addEventListener('click', () => openPack(id)); $('pack-list').append(button);
+  }
+}
+
+function updatePackNavigation() {
+  const query = normalize($('pack-search').value);
+  const active = openedPack || $('pack').value;
+  let visible = 0;
+  for (const button of $('pack-list').children) {
+    button.hidden = !normalize(catalog.packs[button.dataset.pack].name).includes(query);
+    if (!button.hidden) visible++;
+    if (button.dataset.pack === active) button.setAttribute('aria-current', 'true'); else button.removeAttribute('aria-current');
+  }
+  $('pack-nav-empty').hidden = visible > 0;
+}
+
+function showFitting() {
+  $('stage').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'start' });
+}
 
 function packLoadout(id) {
   const members = packMembers(id);
@@ -74,7 +133,7 @@ function equipPack(id) {
   $('hand').value = 'right'; setView('player');
   selectItem(focusItem, false, true);
   if (openedPack === id) $('pack-equipped').textContent = `Набор ${catalog.packs[id].name} надет. Можно заменить отдельные предметы или собрать свой образ.`;
-  $('stage').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'start' });
+  showFitting();
 }
 
 function setView(next) {
@@ -113,7 +172,7 @@ function chooseCatalogItem(item) {
     $('hand-dialog').showModal();
     const preferred = ['left', 'right'].includes(browsingSlot) ? browsingSlot : $('hand').value;
     app.querySelector(`[data-equip-hand="${preferred}"]`).focus();
-  } else selectItem(item);
+  } else { selectItem(item); showFitting(); }
 }
 
 function initRenderer() {
@@ -340,6 +399,8 @@ function filteredItems() {
 function renderCatalog() {
   const items = filteredItems();
   const packIndex = category === 'packs' && !openedPack;
+  app.dataset.packIndex = String(packIndex);
+  updateCatalogLayout(); updatePackNavigation();
   $('kind').parentElement.hidden = packIndex;
   $('pack-detail').hidden = !openedPack;
   if (openedPack) {
@@ -387,7 +448,7 @@ function renderPacks(items) {
     const sub = document.createElement('small'); sub.textContent = `${members.length} скинов · ${catalog.skinDays} дней`;
     const bottom = document.createElement('span'); bottom.className = 'cosmetic-card-bottom';
     const price = document.createElement('span'); price.className = 'cosmetic-card-price'; price.textContent = `${money(packPrice(members))} космиков`;
-    const action = document.createElement('span'); action.className = 'cosmetic-pack-open'; action.textContent = 'Смотреть набор →';
+    const action = document.createElement('span'); action.className = 'cosmetic-pack-open'; action.textContent = 'Предметы набора →';
     bottom.append(price, action); info.append(title, sub, bottom); card.append(thumb, info);
     card.addEventListener('click', () => openPack(id)); $('grid').append(card);
     if (ready) thumbnailQueue.push({ pack: id, element: thumb });
@@ -503,6 +564,21 @@ async function loadNicknameSkin() {
 }
 
 function bindControls() {
+  app.querySelectorAll('button[data-catalog-layout]').forEach(button => button.addEventListener('click', () => setCatalogLayout(button.dataset.catalogLayout)));
+  $('layout-controls').addEventListener('keydown', event => {
+    const buttons = [...$('layout-controls').querySelectorAll('button')];
+    const index = buttons.indexOf(event.target);
+    if (index < 0 || event.altKey || event.ctrlKey || event.metaKey) return;
+    const next = event.key === 'ArrowRight' ? (index + 1) % buttons.length : event.key === 'ArrowLeft' ? (index + buttons.length - 1) % buttons.length : event.key === 'Home' ? 0 : event.key === 'End' ? buttons.length - 1 : -1;
+    if (next < 0) return;
+    event.preventDefault(); buttons[next].focus({ preventScroll: true }); buttons[next].click();
+  });
+  window.addEventListener('popstate', restoreCatalogLayout);
+  $('pack-search').addEventListener('input', updatePackNavigation);
+  $('back-catalog').addEventListener('click', () => {
+    $('catalog').scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'start' });
+    app.querySelector(`button[data-catalog-layout="${catalogLayout}"]`).focus({ preventScroll: true });
+  });
   app.querySelectorAll('[data-view]').forEach(button => button.addEventListener('click', () => {
     setView(button.dataset.view);
     renderPreview(true);
@@ -532,7 +608,7 @@ function bindControls() {
     if (!item) return;
     $('hand').value = button.dataset.equipHand;
     pendingHandItem = null; $('hand-dialog').close();
-    selectItem(item);
+    selectItem(item); showFitting();
   }));
   $('hand-cancel').addEventListener('click', () => $('hand-dialog').close());
   $('hand-dialog').addEventListener('close', () => { if (!$('hand-dialog').open) pendingHandItem = null; });
@@ -587,11 +663,11 @@ async function start() {
     try { initRenderer(); skin = await library.texture('default-skin.png'); }
     catch (error) {
       ready = false;
-      status('Браузер не запустил 3D-просмотр. Включите аппаратное ускорение или попробуйте другой браузер. Каталог доступен ниже.');
+      status('Браузер не запустил 3D-просмотр. Включите аппаратное ускорение или попробуйте другой браузер. Каталог доступен выше.');
       for (const selector of ['[data-view]', '#cosmetic-reset-camera', '#cosmetic-rotate', '#cosmetic-skin', '#cosmetic-reset-skin', '#cosmetic-slim', '#cosmetic-skin-name', '#cosmetic-skin-name-load']) app.querySelectorAll(selector).forEach(control => control.disabled = true);
       console.error(error);
     }
-    bindControls(); renderCatalog();
+    buildPackNavigation(); restoreCatalogLayout(); bindControls(); renderCatalog();
     const initial = catalog.items.find(i => i.nx_id === 'amethyst_sword2') || catalog.items.find(i => i.available);
     selectItem(initial);
     if (ready) {

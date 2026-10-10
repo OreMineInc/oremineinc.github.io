@@ -8,7 +8,60 @@ cosmetic_viewer: true
 ---
 <h1>{% include news-icon.html model="smile" class="page-title-icon" %} Обзор косметики</h1>
 <p class="cosmetic-intro">Соберите свой образ: выберите броню, добавьте оружие и посмотрите на сочетание со всех сторон. Косметика приобретается в игре через <code>/cosmetic</code> на <strong>30 дней</strong>.</p>
-<div id="cosmetic-app" data-assets="{{ '/assets/cosmetics/' | relative_url }}">
+<div id="cosmetic-app" data-catalog-layout="gallery" data-assets="{{ '/assets/cosmetics/' | relative_url }}">
+  <section class="cosmetic-catalog" id="cosmetic-catalog" aria-label="Каталог косметики">
+    <div class="cosmetic-catalog-heading"><h2 id="cosmetic-catalog-title">Наборы косметики</h2><span id="cosmetic-count" role="status" aria-live="polite"></span></div>
+    <div class="cosmetic-layout-toolbar">
+      <span id="cosmetic-layout-label">Вид каталога</span>
+      <div class="cosmetic-layout-controls" id="cosmetic-layout-controls" role="group" aria-labelledby="cosmetic-layout-label">
+        <button type="button" data-catalog-layout="gallery" aria-pressed="true" aria-controls="cosmetic-catalog-body">Витрина</button>
+        <button type="button" data-catalog-layout="list" aria-pressed="false" aria-controls="cosmetic-catalog-body">Список</button>
+        <button type="button" data-catalog-layout="focus" aria-pressed="false" aria-controls="cosmetic-catalog-body">Фокус</button>
+      </div>
+    </div>
+    <p class="cosmetic-catalog-description" id="cosmetic-layout-note">Сравните образы и откройте набор, чтобы примерить броню, меч и щит</p>
+    <div class="cosmetic-slot-filter" id="cosmetic-slot-filter" tabindex="-1" hidden>
+      <span id="cosmetic-slot-filter-label"></span><button type="button" id="cosmetic-slot-filter-clear">Показать всё</button>
+    </div>
+    <div class="cosmetic-filters">
+      <label>Поиск <input type="search" id="cosmetic-search" placeholder="Название, набор или тип предмета…"></label>
+      <label>Набор <select id="cosmetic-pack"><option value="">Все наборы</option></select></label>
+      <label>Тип <select id="cosmetic-kind"><option value="">Все предметы</option></select></label>
+      <label>Сортировка <select id="cosmetic-sort"><option value="pack">По набору</option><option value="price-asc">Сначала дешевле</option><option value="price-desc">Сначала дороже</option><option value="name">По названию</option></select></label>
+    </div>
+    <div class="cosmetic-catalog-body" id="cosmetic-catalog-body">
+      <nav class="cosmetic-pack-nav" id="cosmetic-pack-nav" aria-label="Наборы косметики" hidden>
+        <label>Поиск набора <input type="search" id="cosmetic-pack-search" placeholder="Например, Aceruin"></label>
+        <div id="cosmetic-pack-list"></div>
+        <p id="cosmetic-pack-nav-empty" hidden>Набор не найден</p>
+      </nav>
+      <div class="cosmetic-catalog-main">
+        <div class="cosmetic-category-tabs" role="group" aria-label="Категории">
+          <button type="button" data-category="all" aria-pressed="false">Все</button>
+          <button type="button" data-category="packs" aria-pressed="true">Наборы</button>
+          <button type="button" data-category="armor" aria-pressed="false">Броня</button>
+          <button type="button" data-category="weapon" aria-pressed="false">Оружие</button>
+          <button type="button" data-category="tools" aria-pressed="false">Инструменты</button>
+          <button type="button" data-category="ranged" aria-pressed="false">Дальний бой</button>
+        </div>
+        <div class="cosmetic-pack-detail" id="cosmetic-pack-detail" tabindex="-1" hidden>
+          <div class="cosmetic-pack-detail-heading">
+            <div><h3 id="cosmetic-pack-title"></h3><p id="cosmetic-pack-summary"></p></div>
+            <button type="button" id="cosmetic-back-packs">← Все наборы</button>
+          </div>
+          <div class="cosmetic-pack-detail-actions">
+            <button type="button" id="cosmetic-equip-opened-pack">Примерить набор</button>
+            <p id="cosmetic-pack-defaults"></p>
+          </div>
+          <p class="cosmetic-pack-equipped" id="cosmetic-pack-equipped" role="status" aria-live="polite"></p>
+        </div>
+        <div class="cosmetic-grid" id="cosmetic-grid"></div>
+        <p id="cosmetic-empty" hidden>Ничего не найдено. Попробуйте изменить запрос или фильтры.</p>
+        <button type="button" id="cosmetic-more" hidden>Показать ещё</button>
+      </div>
+    </div>
+  </section>
+  <button type="button" class="cosmetic-back-catalog" id="cosmetic-back-catalog" aria-controls="cosmetic-catalog">← К каталогу</button>
   <div class="cosmetic-workbench">
     <section class="cosmetic-fitting" aria-label="Примерочная">
       <div class="cosmetic-view-tabs" role="group" aria-label="Режим просмотра">
@@ -51,7 +104,7 @@ cosmetic_viewer: true
       <div class="cosmetic-selected-tags"><span id="cosmetic-selected-kind"></span><span id="cosmetic-selected-price"></span><span>30 дней</span></div>
       <p id="cosmetic-selected-note">Нажмите на предмет в каталоге, чтобы примерить его.</p>
       <div class="cosmetic-selected-actions">
-        <button type="button" id="cosmetic-equip-pack">Надеть всё из набора</button>
+        <button type="button" id="cosmetic-equip-pack">Примерить набор</button>
         <label>Держать предмет <select id="cosmetic-hand"><option value="right">В правой руке</option><option value="left">В левой руке</option></select></label>
       </div>
       <div class="cosmetic-pack-price" id="cosmetic-pack-price"></div>
@@ -59,40 +112,6 @@ cosmetic_viewer: true
       <p class="cosmetic-preview-note">Модели и текстуры взяты из ресурс-пака сервера. Освещение, анимации и положение камеры в игре могут отличаться.</p>
     </section>
   </div>
-  <section class="cosmetic-catalog" aria-label="Каталог косметики">
-    <div class="cosmetic-catalog-heading"><h2>Каталог</h2><span id="cosmetic-count" role="status" aria-live="polite"></span></div>
-    <div class="cosmetic-slot-filter" id="cosmetic-slot-filter" tabindex="-1" hidden>
-      <span id="cosmetic-slot-filter-label"></span><button type="button" id="cosmetic-slot-filter-clear">Показать всё</button>
-    </div>
-    <div class="cosmetic-filters">
-      <label>Поиск <input type="search" id="cosmetic-search" placeholder="Название, набор или тип предмета…"></label>
-      <label>Набор <select id="cosmetic-pack"><option value="">Все наборы</option></select></label>
-      <label>Тип <select id="cosmetic-kind"><option value="">Все предметы</option></select></label>
-      <label>Сортировка <select id="cosmetic-sort"><option value="pack">По набору</option><option value="price-asc">Сначала дешевле</option><option value="price-desc">Сначала дороже</option><option value="name">По названию</option></select></label>
-    </div>
-    <div class="cosmetic-category-tabs" role="group" aria-label="Категории">
-      <button type="button" data-category="all" aria-pressed="true">Все</button>
-      <button type="button" data-category="packs" aria-pressed="false">Наборы</button>
-      <button type="button" data-category="armor" aria-pressed="false">Броня</button>
-      <button type="button" data-category="weapon" aria-pressed="false">Оружие</button>
-      <button type="button" data-category="tools" aria-pressed="false">Инструменты</button>
-      <button type="button" data-category="ranged" aria-pressed="false">Дальний бой</button>
-    </div>
-    <div class="cosmetic-pack-detail" id="cosmetic-pack-detail" tabindex="-1" hidden>
-      <div class="cosmetic-pack-detail-heading">
-        <div><h3 id="cosmetic-pack-title"></h3><p id="cosmetic-pack-summary"></p></div>
-        <button type="button" id="cosmetic-back-packs">← Все наборы</button>
-      </div>
-      <div class="cosmetic-pack-detail-actions">
-        <button type="button" id="cosmetic-equip-opened-pack">Надеть всё из набора</button>
-        <p id="cosmetic-pack-defaults"></p>
-      </div>
-      <p class="cosmetic-pack-equipped" id="cosmetic-pack-equipped" role="status" aria-live="polite"></p>
-    </div>
-    <div class="cosmetic-grid" id="cosmetic-grid"></div>
-    <p id="cosmetic-empty" hidden>Ничего не найдено. Попробуйте изменить запрос или фильтры.</p>
-    <button type="button" id="cosmetic-more" hidden>Показать ещё</button>
-  </section>
   <dialog class="cosmetic-hand-dialog" id="cosmetic-hand-dialog" aria-labelledby="cosmetic-hand-dialog-title" aria-describedby="cosmetic-hand-dialog-note">
     <h2 id="cosmetic-hand-dialog-title">В какую руку?</h2>
     <p class="cosmetic-hand-dialog-item" id="cosmetic-hand-dialog-item"></p>
