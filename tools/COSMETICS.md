@@ -1,6 +1,6 @@
 # Cosmetic catalog
 
-This is a static Jekyll page at `/mechanics/cosmetics/preview/`. It needs no account service or server API. The PNG skin selected by a visitor is processed locally and is not uploaded anywhere.
+This is a static Jekyll page at `/mechanics/cosmetics/preview/`. It needs no OreMine backend or login. The PNG skin selected by a visitor is processed locally and is not uploaded anywhere. Optional nickname lookup fetches the public PNG skin from `https://mc-heads.net/skin/{nickname}`; only the typed nickname is sent, without credentials or a referring-page URL.
 
 Catalog source: the supplied OreCosmetic `skins.json`, `packs.json` and `config.json`. Models and equipment textures: the supplied Nexo item definitions and resource packs, including `pack/external_packs`. Credits embedded in the original JSON models are retained. Three.js is vendored with its MIT license at `assets/js/vendor/THREE-LICENSE.txt`.
 
@@ -24,3 +24,9 @@ First-person rendering uses Minecraft's resting item offset `(±0.56, -0.52, -0.
 The hand view uses a 16:10 viewport even on narrow screens so the held item is not cropped out by a portrait canvas. Player and standalone-item views retain their taller inspection area.
 
 Meshes use front-face rendering, matching the resource-pack's outer and inverted inner shells. Double-sided rendering would expose the inside of inflated shells and cover the Ender texture with solid pink surfaces. Winding is corrected for Z-reflected cuboid caps, mirrored player/armor limbs, and generated sprites. Texture colors are preserved.
+
+Fitting controls: an occupied slot removes its item, while an empty slot filters the catalog to wearable armor for that body part or available hand-held items. Hand-held catalog cards open an accessible native dialog before equipping; cancelling leaves the loadout unchanged. Choosing a hand replaces only that hand's item. The clear button saves a memory-only snapshot and becomes a restore button, restoring all six slots exactly even if a new item has since been equipped. Refreshing the page clears that snapshot.
+
+The Packs category shows shop packs as searchable, sortable and paginated cards, with a full-outfit thumbnail for armor packs and a representative item for weapon-only packs. Opening a card shows only that pack's skins and a back button. Both equip-pack buttons use the same default outfit: the first available wearable item for each armor slot, an available SWORD whose item ID contains `sword` (falling back to the first available SWORD) in the right hand and the first available shield in the left hand. Missing slots are emptied, never borrowed from another pack. Individual items can still be equipped or moved to either hand afterwards. Pack thumbnails use the default player skin, independently of a visitor's skin.
+
+Nickname lookup accepts Minecraft Java names (3–16 letters, digits or underscores), has a 20-second timeout, validates the PNG signature and supported dimensions, and preserves the previous skin on failure. File uploads and reset cancel pending lookups so late responses cannot overwrite a newer selection. The manual Alex checkbox remains available. A server-specific skin may differ from the public nickname skin; visitors can upload their PNG instead.

@@ -33,8 +33,17 @@ cosmetic_viewer: true
         <button type="button" id="cosmetic-reset-skin">Сбросить скин</button>
       </div>
       <p class="cosmetic-skin-note" id="cosmetic-skin-note" role="status">PNG 64 × 64 или 64 × 32. Скин остаётся в вашем браузере.</p>
+      <form class="cosmetic-skin-name-form" id="cosmetic-skin-name-form">
+        <label for="cosmetic-skin-name">Minecraft-ник</label>
+        <div class="cosmetic-skin-name-row">
+          <input type="text" id="cosmetic-skin-name" placeholder="Например, Notch" minlength="3" maxlength="16" pattern="[A-Za-z0-9_]{3,16}" autocomplete="off" autocapitalize="off" spellcheck="false" required>
+          <button type="submit" id="cosmetic-skin-name-load">Применить скин</button>
+        </div>
+        <p class="cosmetic-skin-privacy">По нику загружается публичный скин Minecraft. Внешнему сервису передаётся только ник. Если на сервере у вас другой скин, загрузите PNG. Для скина Alex выберите «Тонкие руки».</p>
+      </form>
       <div class="cosmetic-loadout-heading"><strong>Ваша экипировка</strong><button type="button" id="cosmetic-clear">Снять всё</button></div>
       <div class="cosmetic-loadout" id="cosmetic-loadout"></div>
+      <p class="cosmetic-loadout-hint">Нажмите на надетый предмет, чтобы снять его. Пустой слот покажет подходящую косметику в каталоге.</p>
     </section>
     <section class="cosmetic-selection" aria-label="Выбранная косметика">
       <span class="cosmetic-eyebrow" id="cosmetic-selected-pack">Выберите предмет</span>
@@ -42,7 +51,7 @@ cosmetic_viewer: true
       <div class="cosmetic-selected-tags"><span id="cosmetic-selected-kind"></span><span id="cosmetic-selected-price"></span><span>30 дней</span></div>
       <p id="cosmetic-selected-note">Нажмите на предмет в каталоге, чтобы примерить его.</p>
       <div class="cosmetic-selected-actions">
-        <button type="button" id="cosmetic-equip-pack">Примерить броню набора</button>
+        <button type="button" id="cosmetic-equip-pack">Надеть всё из набора</button>
         <label>Держать предмет <select id="cosmetic-hand"><option value="right">В правой руке</option><option value="left">В левой руке</option></select></label>
       </div>
       <div class="cosmetic-pack-price" id="cosmetic-pack-price"></div>
@@ -52,6 +61,9 @@ cosmetic_viewer: true
   </div>
   <section class="cosmetic-catalog" aria-label="Каталог косметики">
     <div class="cosmetic-catalog-heading"><h2>Каталог</h2><span id="cosmetic-count" role="status" aria-live="polite"></span></div>
+    <div class="cosmetic-slot-filter" id="cosmetic-slot-filter" tabindex="-1" hidden>
+      <span id="cosmetic-slot-filter-label"></span><button type="button" id="cosmetic-slot-filter-clear">Показать всё</button>
+    </div>
     <div class="cosmetic-filters">
       <label>Поиск <input type="search" id="cosmetic-search" placeholder="Название, набор или тип предмета…"></label>
       <label>Набор <select id="cosmetic-pack"><option value="">Все наборы</option></select></label>
@@ -60,15 +72,37 @@ cosmetic_viewer: true
     </div>
     <div class="cosmetic-category-tabs" role="group" aria-label="Категории">
       <button type="button" data-category="all" aria-pressed="true">Все</button>
+      <button type="button" data-category="packs" aria-pressed="false">Наборы</button>
       <button type="button" data-category="armor" aria-pressed="false">Броня</button>
       <button type="button" data-category="weapon" aria-pressed="false">Оружие</button>
       <button type="button" data-category="tools" aria-pressed="false">Инструменты</button>
       <button type="button" data-category="ranged" aria-pressed="false">Дальний бой</button>
     </div>
+    <div class="cosmetic-pack-detail" id="cosmetic-pack-detail" tabindex="-1" hidden>
+      <div class="cosmetic-pack-detail-heading">
+        <div><h3 id="cosmetic-pack-title"></h3><p id="cosmetic-pack-summary"></p></div>
+        <button type="button" id="cosmetic-back-packs">← Все наборы</button>
+      </div>
+      <div class="cosmetic-pack-detail-actions">
+        <button type="button" id="cosmetic-equip-opened-pack">Надеть всё из набора</button>
+        <p id="cosmetic-pack-defaults"></p>
+      </div>
+      <p class="cosmetic-pack-equipped" id="cosmetic-pack-equipped" role="status" aria-live="polite"></p>
+    </div>
     <div class="cosmetic-grid" id="cosmetic-grid"></div>
     <p id="cosmetic-empty" hidden>Ничего не найдено. Попробуйте изменить запрос или фильтры.</p>
     <button type="button" id="cosmetic-more" hidden>Показать ещё</button>
   </section>
+  <dialog class="cosmetic-hand-dialog" id="cosmetic-hand-dialog" aria-labelledby="cosmetic-hand-dialog-title" aria-describedby="cosmetic-hand-dialog-note">
+    <h2 id="cosmetic-hand-dialog-title">В какую руку?</h2>
+    <p class="cosmetic-hand-dialog-item" id="cosmetic-hand-dialog-item"></p>
+    <p id="cosmetic-hand-dialog-note">Выберите, куда добавить предмет. Экипировка во второй руке останется на месте.</p>
+    <div class="cosmetic-hand-choices">
+      <button type="button" data-equip-hand="left">В левую руку</button>
+      <button type="button" data-equip-hand="right">В правую руку</button>
+    </div>
+    <button type="button" class="cosmetic-hand-cancel" id="cosmetic-hand-cancel">Отмена</button>
+  </dialog>
   <noscript>Для 3D-примерки включите JavaScript в браузере.</noscript>
 </div>
 <script type="importmap">{"imports":{"three":"{{ '/assets/js/vendor/three.module.min.js' | relative_url }}"}}</script>

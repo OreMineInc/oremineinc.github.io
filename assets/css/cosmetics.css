@@ -7,6 +7,7 @@
 #cosmetic-app button, #cosmetic-app select, #cosmetic-app input { font: inherit; }
 #cosmetic-app button, .cosmetic-upload { cursor: pointer; }
 #cosmetic-app button, #cosmetic-app select, #cosmetic-app input[type="search"] { border: 1px solid var(--border); border-radius: 8px; background: var(--panel); color: var(--text); padding: 10px 14px; }
+#cosmetic-app input[type="text"] { border: 1px solid var(--border); border-radius: 8px; background: var(--panel); color: var(--text); padding: 10px 14px; min-width: 0; }
 #cosmetic-app button:hover { border-color: var(--accent); background: var(--accent-soft); }
 #cosmetic-app button:focus-visible, #cosmetic-app input:focus-visible, #cosmetic-app select:focus-visible, .cosmetic-upload:focus-within { outline: 2px solid var(--accent); outline-offset: 3px; }
 #cosmetic-app button:disabled { cursor: default; opacity: .45; }
@@ -16,6 +17,7 @@
 .cosmetic-view-tabs { display: flex; gap: 6px; margin-bottom: 12px; flex-wrap: wrap; }
 #cosmetic-app [aria-pressed="true"] { background: var(--accent-soft); color: var(--accent); border-color: var(--accent); }
 .cosmetic-stage { height: 470px; position: relative; overflow: hidden; border: 1px solid #304257; border-radius: 14px; background: radial-gradient(ellipse at 50% 35%, #283e56, var(--cosmetic-stage) 78%); }
+.cosmetic-stage, .cosmetic-pack-detail, .cosmetic-slot-filter { scroll-margin-top: 90px; }
 /* Keep a game-shaped viewport: a portrait canvas would crop the held item out on phones. */
 #cosmetic-app[data-view="hand"] .cosmetic-stage { height: auto; aspect-ratio: 16 / 10; }
 #cosmetic-canvas { display: block; width: 100%; height: 100%; touch-action: none; }
@@ -30,12 +32,18 @@
 .cosmetic-upload input { position: absolute; opacity: 0; inset: 0; width: 100%; cursor: pointer; }
 .cosmetic-slim { display: flex; gap: 6px; align-items: center; }
 #cosmetic-app #cosmetic-reset-skin { font-size: 14px; padding: 8px 10px; }
+.cosmetic-skin-name-form { margin-top: 18px; }
+.cosmetic-skin-name-form > label { display: block; font-size: 14px; color: var(--muted); margin-bottom: 7px; }
+.cosmetic-skin-name-row { display: flex; gap: 8px; }
+.cosmetic-skin-name-row input { flex: 1; width: 100%; }
+.content .cosmetic-skin-privacy, .content .cosmetic-loadout-hint { color: var(--muted); font-size: 13px; line-height: 1.6; margin: 9px 0 0; }
 .cosmetic-loadout-heading { margin-top: 24px; display: flex; align-items: center; justify-content: space-between; gap: 12px; }
 #cosmetic-app #cosmetic-clear { border: 0; font-size: 14px; background: none; padding: 4px; color: var(--muted); }
 .cosmetic-loadout { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; margin-top: 10px; }
 #cosmetic-app .cosmetic-slot { text-align: left; padding: 10px; min-height: 72px; display: grid; gap: 4px; font-size: 14px; }
 .cosmetic-slot span { color: var(--muted); font-size: 13px; }
 .cosmetic-slot strong { font-weight: 500; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#cosmetic-app .cosmetic-slot[data-browsing="true"] { border-color: var(--accent); background: var(--accent-soft); }
 .cosmetic-selection { background: var(--panel); border: 1px solid var(--border); border-radius: 14px; padding: 24px; align-self: start; }
 .cosmetic-eyebrow { color: var(--accent); font-size: 14px; letter-spacing: .03em; }
 .content .cosmetic-selection h2 { margin: 12px 0 18px; font-size: 28px; line-height: 1.2; overflow-wrap: anywhere; }
@@ -53,13 +61,26 @@
 .cosmetic-catalog-heading { display: flex; justify-content: space-between; align-items: center; gap: 16px; }
 .content .cosmetic-catalog-heading h2 { margin: 0; }
 #cosmetic-count { font-size: 14px; color: var(--muted); }
+.cosmetic-slot-filter { margin-top: 16px; padding: 10px 14px; border: 1px solid var(--border); background: var(--accent-soft); border-radius: 8px; display: flex; gap: 12px; align-items: center; justify-content: space-between; font-size: 14px; }
+#cosmetic-app #cosmetic-slot-filter-clear { flex-shrink: 0; font-size: 13px; padding: 6px 10px; }
 .cosmetic-filters { display: grid; grid-template-columns: minmax(180px, 1.8fr) repeat(3, minmax(130px, 1fr)); gap: 12px; margin: 20px 0 16px; }
 .cosmetic-filters select, .cosmetic-filters input { width: 100%; min-width: 0; }
 .cosmetic-category-tabs { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 22px; }
+.cosmetic-pack-detail { margin-bottom: 22px; padding: 20px; border: 1px solid var(--border); border-radius: 12px; background: var(--panel); }
+.cosmetic-pack-detail-heading { display: flex; gap: 16px; align-items: flex-start; justify-content: space-between; }
+.content .cosmetic-pack-detail h3 { margin: 0 0 8px; font-size: 24px; overflow-wrap: anywhere; }
+.content .cosmetic-pack-detail p { margin: 0; font-size: 14px; color: var(--muted); line-height: 1.6; }
+.cosmetic-pack-detail-actions { display: flex; align-items: center; gap: 16px; margin-top: 18px; }
+#cosmetic-app #cosmetic-equip-opened-pack { flex-shrink: 0; background: var(--accent-strong); color: #fff; border-color: var(--accent-strong); }
+#cosmetic-app #cosmetic-back-packs { flex-shrink: 0; font-size: 14px; }
+.content .cosmetic-pack-equipped:not(:empty) { margin-top: 12px; color: var(--accent); }
 .cosmetic-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 14px; }
 #cosmetic-app .cosmetic-card { padding: 0; text-align: left; overflow: hidden; display: flex; flex-direction: column; background: var(--panel); }
 .cosmetic-thumbnail { display: flex; align-items: center; justify-content: center; width: 100%; height: 132px; background: linear-gradient(145deg, #24344a, #131d2a); color: #c9d6e8; }
 .cosmetic-thumbnail img { width: 100%; height: 100%; object-fit: contain; }
+.cosmetic-pack-card .cosmetic-thumbnail { height: 190px; }
+.cosmetic-pack-open { color: var(--muted); font-size: 13px; }
+.cosmetic-pack-card .cosmetic-card-bottom { flex-wrap: wrap; }
 .cosmetic-card-info { display: grid; gap: 7px; padding: 14px; width: 100%; }
 .cosmetic-card-info strong { font-size: 15px; font-weight: 600; line-height: 1.35; }
 .cosmetic-card-info small { color: var(--muted); font-size: 13px; line-height: 1.4; }
@@ -67,7 +88,17 @@
 .cosmetic-card-price { color: var(--accent); }
 .cosmetic-card-unavailable { color: var(--warning); font-size: 13px; }
 #cosmetic-app #cosmetic-more { display: block; margin: 26px auto 0; min-width: 200px; }
+.cosmetic-hand-dialog { width: min(430px, calc(100vw - 32px)); max-height: calc(100dvh - 32px); overflow-y: auto; box-sizing: border-box; margin: auto; padding: 26px; border: 1px solid var(--border); border-radius: 16px; background: var(--panel); color: var(--text); box-shadow: 0 20px 80px #0005; }
+.cosmetic-hand-dialog::backdrop { background: #080f1acc; }
+.content .cosmetic-hand-dialog h2 { font-size: 26px; margin: 0 0 14px; }
+.content .cosmetic-hand-dialog p { font-size: 14px; line-height: 1.6; margin: 10px 0 18px; color: var(--muted); }
+.content .cosmetic-hand-dialog .cosmetic-hand-dialog-item { color: var(--accent); font-size: 16px; font-weight: 600; overflow-wrap: anywhere; }
+.cosmetic-hand-choices { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+#cosmetic-app .cosmetic-hand-choices button { min-height: 60px; border-color: var(--accent); }
+#cosmetic-app .cosmetic-hand-cancel { display: block; margin: 16px auto 0; background: none; border-color: transparent; color: var(--muted); font-size: 14px; }
 @media (min-width: 1800px) { .cosmetic-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); } }
 @media (max-width: 1200px) { .cosmetic-workbench { grid-template-columns: minmax(0, 1fr) 280px; gap: 16px; } .cosmetic-selection { padding: 18px; } .cosmetic-filters { grid-template-columns: repeat(2, minmax(0, 1fr)); } .cosmetic-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
 @media (max-width: 760px) { .cosmetic-workbench { grid-template-columns: 1fr; } .cosmetic-stage { height: 420px; } .cosmetic-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .cosmetic-view-tabs button { flex: 1; padding: 9px 6px !important; font-size: 14px !important; } .cosmetic-loadout { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 760px) { .cosmetic-pack-detail-heading, .cosmetic-pack-detail-actions { flex-direction: column; align-items: stretch; } .cosmetic-pack-card .cosmetic-thumbnail { height: 165px; } }
 @media (prefers-reduced-motion: reduce) { .cosmetic-stage { scroll-behavior: auto; } }
+@media (max-width: 420px) { .cosmetic-skin-name-row { flex-wrap: wrap; } .cosmetic-skin-name-row input { flex-basis: 100%; } .cosmetic-skin-name-row button { width: 100%; } .cosmetic-hand-dialog { padding: 22px 18px; } }
