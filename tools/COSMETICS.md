@@ -12,7 +12,7 @@ To refresh assets, install `yaml` and `three@0.180.0` in a separate tools direct
 
 The importer resolves parent models, texture references and Nexo equippable assets. It searches the extracted pack, current `pack/assets` and current `pack/external_packs/*/assets`, then optional archived Nexo folders. Archives only fill absent files; they never override present current-wipe assets or shop definitions. It normalizes legacy `.png` suffixes and uses the corresponding original armor layer texture when the equipment JSON names an absent file. Source server files are not modified.
 
-`assets/cosmetics/import-report.json` lists unresolved source references and models recovered from archives. All 446 catalog entries currently have previews. Ten previously unresolved Forge models came from the current wipe's external pack; `plny_eternal_bones_set_axe` and `shadowsteel_axe` came from `Вайп10/Резерв/Nexo`. The wipe09 Nexo folder was also supplied as a lower-priority fallback. Original model geometry and textures are used; replacement geometry is not invented.
+`assets/cosmetics/import-report.json` lists unresolved source references and models recovered from archives. All 368 catalog entries currently have previews. Ten previously unresolved Forge models came from the current wipe's external pack; `plny_eternal_bones_set_axe` and `shadowsteel_axe` came from `Вайп10/Резерв/Nexo`. The wipe09 Nexo folder was also supplied as a lower-priority fallback. Original model geometry and textures are used; replacement geometry is not invented.
 
 The default Minecraft player skin is copied from the extracted Minecraft assets reference:
 https://github.com/InventivetalentDev/minecraft-assets/blob/1.21.8/assets/minecraft/textures/entity/player/wide/steve.png

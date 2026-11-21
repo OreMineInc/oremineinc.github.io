@@ -15,6 +15,10 @@ section: reference
   <a class="official-link" href="https://discord.gg/oremine" target="_blank" rel="noopener noreferrer">{% include astral-icon.html model="crystal-punk" %}<strong>Discord OreMine</strong><small>Сообщество и формы обращений</small></a>
 </div>
 
+## В лобби ресурспак работает, а на сервере пропадает. Что делать?
+
+Напишите в [техподдержку OreMine](https://t.me/oreminestaff). Укажите, на какой сервер вы перешли из лобби и какие текстуры пропали. Если можете, приложите скриншот.
+
 ## Меня убили и забрали вещи. Вернут ли их?
 
 Обычная потеря вещей в PvP, из-за мобов, лавы или незакрытой базы, как правило, не компенсируется.

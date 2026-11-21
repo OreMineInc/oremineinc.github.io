@@ -114,24 +114,31 @@ const equipment = (ref) => {
   const file = locate(ref, 'equipment', '.json') || locate(ref, 'models/equipment', '.json');
   const raw = file ? readJSON(file) : {};
   const result = {};
-  for (const type of ['humanoid', 'humanoid_leggings']) {
+  const types = raw.layers?.wings ? ['wings'] : ['humanoid', 'humanoid_leggings'];
+  for (const type of types) {
     result[type] = (raw.layers?.[type] || []).map(layer => {
       const [ns, name] = splitRef(layer.texture);
       const texRef = `${ns}:entity/equipment/${type}/${name}`;
-      return { ...layer, texture: locate(texRef, 'textures', '.png') ? texture(texRef) : legacyEquipment(ref, type) };
+      const fallback = () => type === 'wings' ? null : legacyEquipment(ref, type);
+      return { ...layer, texture: locate(texRef, 'textures', '.png') ? texture(texRef) : fallback() };
     }).filter(layer => layer.texture);
-    if (!result[type].length) {
+    if (type !== 'wings' && !result[type].length) {
       const fallback = legacyEquipment(ref, type);
       if (fallback) result[type] = [{ texture: fallback }];
     }
   }
-  return result.humanoid.length ? result : null;
+  return Object.values(result).some(layers => layers.length) ? result : null;
 };
 const items = skins.map((skin) => {
   const def = definitions[skin.nx_id];
   if (!def) { issues.push(`Missing Nexo item: ${skin.nx_id}`); return { ...skin, available: false }; }
   const pack = def.Pack || {};
   let raw = pack.model ? model(pack.model) : null;
+  if (!raw && def.Components?.item_model) {
+    const file = locate(def.Components.item_model, 'items', '.json');
+    const reference = file && readJSON(file).model?.model;
+    if (typeof reference === 'string') raw = model(reference);
+  }
   if (!raw && pack.texture) raw = { parent: pack.parent_model || 'item/generated', textures: { layer0: pack.texture } };
   if (raw?.parent && !raw.elements?.length) {
     const parent = model(raw.parent);
@@ -165,7 +172,8 @@ const items = skins.map((skin) => {
     }
   }
   entry.helmetModel = skin.kind === 'HELMET' && Boolean(raw?.elements?.length) && !entry.equipment?.humanoid?.length;
-  if (['CHESTPLATE', 'LEGGINGS', 'BOOTS', 'HELMET'].includes(skin.kind) && !entry.helmetModel && !entry.wearModel && !entry.equipment?.humanoid?.length) {
+  const wornLayer = { CHESTPLATE: 'humanoid', LEGGINGS: 'humanoid_leggings', BOOTS: 'humanoid', HELMET: 'humanoid', ELYTRA: 'wings' }[skin.kind];
+  if (wornLayer && !entry.helmetModel && !entry.wearModel && !entry.equipment?.[wornLayer]?.length) {
     issues.push(`Missing wearable equipment: ${skin.nx_id}`);
   }
   return entry;

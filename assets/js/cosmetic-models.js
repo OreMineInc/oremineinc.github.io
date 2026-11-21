@@ -108,12 +108,20 @@ export class ModelLibrary {
     const group = new THREE.Group();
     group.userData.display = raw.display || {};
     group.userData.name = entry.nx_id;
+    // The forged swords define their grip explicitly in the mesh.
+    const handle = entry.kind === 'SWORD' && raw.elements?.find(element => element.name === 'Leather grip' && !element.rotation?.angle);
+    if (handle) {
+      const center = handle.from.map((value, i) => (value + handle.to[i]) / 2 - 8);
+      group.userData.handle = [center[0], center[1], -center[2]];
+    }
     if (raw.elements?.length) {
       const buffers = new Map();
+      const atlases = [...new Set(Object.values(raw.textures).filter(Boolean))];
       for (const element of raw.elements) {
         for (const [direction, face] of Object.entries(element.faces || {})) {
           const key = face.texture.replace(/^#/, '');
-          const texPath = raw.textures[key];
+          // Some single-atlas models keep an obsolete numeric texture slot on a blade face.
+          const texPath = raw.textures[key] || (/^\d+$/.test(key) && atlases.length === 1 ? atlases[0] : null);
           if (!texPath || !faces[direction]) continue;
           if (!buffers.has(texPath)) buffers.set(texPath, { positions: [], uvs: [] });
           let vertices = faces[direction](element.from, element.to).map(v => new THREE.Vector3(...v));

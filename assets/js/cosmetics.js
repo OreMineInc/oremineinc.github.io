@@ -6,10 +6,10 @@ const app = document.querySelector('#cosmetic-app');
 const $ = id => document.getElementById('cosmetic-' + id);
 const base = app.dataset.assets;
 const library = new ModelLibrary(base);
-const kinds = { HELMET: 'Шлем', CHESTPLATE: 'Нагрудник', LEGGINGS: 'Поножи', BOOTS: 'Ботинки', SHIELD: 'Щит', SWORD: 'Меч', AXE: 'Топор', MACE: 'Булава', PICKAXE: 'Кирка', SHOVEL: 'Лопата', HOE: 'Мотыга', ROD: 'Удочка', BOW: 'Лук', CROSSBOW: 'Арбалет', TRIDENT: 'Трезубец' };
+const kinds = { ELYTRA: 'Элитры', HELMET: 'Шлем', CHESTPLATE: 'Нагрудник', LEGGINGS: 'Поножи', BOOTS: 'Ботинки', SHIELD: 'Щит', SWORD: 'Меч', AXE: 'Топор', MACE: 'Булава', PICKAXE: 'Кирка', SHOVEL: 'Лопата', HOE: 'Мотыга', ROD: 'Удочка', BOW: 'Лук', CROSSBOW: 'Арбалет', TRIDENT: 'Трезубец' };
 const armorKinds = ['HELMET', 'CHESTPLATE', 'LEGGINGS', 'BOOTS'];
-const categories = { armor: [...armorKinds, 'SHIELD'], weapon: ['SWORD', 'AXE', 'MACE'], tools: ['PICKAXE', 'SHOVEL', 'HOE', 'ROD'], ranged: ['BOW', 'CROSSBOW', 'TRIDENT'] };
-const slots = { HELMET: 'Шлем', CHESTPLATE: 'Нагрудник', LEGGINGS: 'Поножи', BOOTS: 'Ботинки', right: 'Правая рука', left: 'Левая рука' };
+const categories = { armor: [...armorKinds, 'SHIELD', 'ELYTRA'], weapon: ['SWORD', 'AXE', 'MACE'], tools: ['PICKAXE', 'SHOVEL', 'HOE', 'ROD'], ranged: ['BOW', 'CROSSBOW', 'TRIDENT'] };
+const slots = { HELMET: 'Шлем', CHESTPLATE: 'Нагрудник / элитры', LEGGINGS: 'Поножи', BOOTS: 'Ботинки', right: 'Правая рука', left: 'Левая рука' };
 const loadout = Object.fromEntries(Object.keys(slots).map(key => [key, null]));
 const money = number => new Intl.NumberFormat('ru-RU').format(number);
 let catalog, selected, skin, view = 'player', category = 'packs', limit = 24;
@@ -28,7 +28,9 @@ const thumbnails = new Map();
 const status = message => { $('status').textContent = message; $('status').hidden = !message; };
 const normalize = value => value.toLowerCase().replaceAll('ё', 'е').trim();
 const packName = item => catalog.packs[item.pack]?.name || item.pack;
-const canWear = item => Boolean(item.helmetModel || item.wearModel || item.equipment?.[item.kind === 'LEGGINGS' ? 'humanoid_leggings' : 'humanoid']?.length);
+const armorSlot = kind => kind === 'ELYTRA' ? 'CHESTPLATE' : armorKinds.includes(kind) ? kind : null;
+const equipmentLayer = kind => ({ ELYTRA: 'wings', LEGGINGS: 'humanoid_leggings' })[kind] || 'humanoid';
+const canWear = item => Boolean(item.helmetModel || item.wearModel || item.equipment?.[equipmentLayer(item.kind)]?.length);
 const packMembers = id => catalog.items.filter(item => item.pack === id);
 const packPrice = members => Math.floor(members.reduce((sum, item) => sum + item.price, 0) * (1 - catalog.packDiscount / 100));
 
@@ -87,6 +89,7 @@ function showFitting() {
 function packLoadout(id) {
   const members = packMembers(id);
   const outfit = Object.fromEntries(armorKinds.map(kind => [kind, members.find(item => item.kind === kind && item.available && canWear(item)) || null]));
+  outfit.CHESTPLATE ??= members.find(item => item.kind === 'ELYTRA' && item.available && canWear(item)) || null;
   const swords = members.filter(item => item.kind === 'SWORD' && item.available);
   outfit.right = swords.find(item => /sword/i.test(item.nx_id)) || swords[0] || null;
   outfit.left = members.find(item => item.kind === 'SHIELD' && item.available) || null;
@@ -97,7 +100,7 @@ function packDefaults(id) {
   const outfit = packLoadout(id);
   const armor = armorKinds.filter(kind => outfit[kind]);
   const parts = [];
-  if (armor.length) parts.push(armor.length === 4 ? 'Вся броня' : armor.map(kind => kinds[kind]).join(', '));
+  if (armor.length) parts.push(armor.length === 4 && outfit.CHESTPLATE.kind === 'CHESTPLATE' ? 'Вся броня' : armor.map(slot => kinds[outfit[slot].kind]).join(', '));
   if (outfit.right) parts.push('меч — в правую руку');
   if (outfit.left) parts.push('щит — в левую руку');
   const empty = Object.values(outfit).some(item => !item) ? ' Остальные слоты будут пустыми.' : '';
@@ -145,8 +148,8 @@ function updateSelectionNote() {
   if (!selected) return;
   const item = selected;
   if (!item.available) $('selected-note').textContent = 'Товар указан в настройках магазина, но его 3D-модель отсутствует в переданных файлах ресурс-пака.';
-  else if (armorKinds.includes(item.kind)) {
-    $('selected-note').textContent = !canWear(item) ? 'Предмет можно рассмотреть отдельно и в руке. Текстура надетой брони отсутствует в ресурс-паке.' : loadout[item.kind] === item ? 'Скин надет на персонажа. Примерьте весь комплект или сочетайте его с другими наборами.' : 'Скин сейчас не надет. Нажмите на его карточку в каталоге, чтобы примерить.';
+  else if (armorSlot(item.kind)) {
+    $('selected-note').textContent = !canWear(item) ? 'Предмет можно рассмотреть отдельно и в руке. Текстура надетой брони отсутствует в ресурс-паке.' : loadout[armorSlot(item.kind)] === item ? 'Скин надет на персонажа. Примерьте весь комплект или сочетайте его с другими наборами.' : 'Скин сейчас не надет. Нажмите на его карточку в каталоге, чтобы примерить.';
   } else {
     const hands = ['left', 'right'].filter(hand => loadout[hand] === item);
     const where = hands.length === 2 ? 'обе руки' : hands[0] === 'left' ? 'левую руку' : 'правую руку';
@@ -157,7 +160,7 @@ function updateSelectionNote() {
 function showSlotCatalog(slot) {
   browsingSlot = slot;
   category = 'all'; openedPack = null; limit = 24;
-  $('search').value = ''; $('pack').value = ''; $('kind').value = armorKinds.includes(slot) ? slot : ''; $('sort').value = 'name';
+  $('search').value = ''; $('pack').value = ''; $('kind').value = armorKinds.includes(slot) && slot !== 'CHESTPLATE' ? slot : ''; $('sort').value = 'name';
   updateCategoryButtons();
   renderLoadout(); renderCatalog();
   if (view !== 'player') { setView('player'); renderPreview(true); }
@@ -166,13 +169,17 @@ function showSlotCatalog(slot) {
 }
 
 function chooseCatalogItem(item) {
-  if (item.available && !armorKinds.includes(item.kind)) {
+  if (item.available && !armorSlot(item.kind)) {
     pendingHandItem = item;
     $('hand-dialog-item').textContent = `${item.name} · ${packName(item)}`;
     $('hand-dialog').showModal();
     const preferred = ['left', 'right'].includes(browsingSlot) ? browsingSlot : $('hand').value;
     app.querySelector(`[data-equip-hand="${preferred}"]`).focus();
-  } else { selectItem(item); showFitting(); }
+  } else {
+    if (item.kind === 'ELYTRA') setView('player');
+    selectItem(item, true, item.kind === 'ELYTRA' || view === 'item');
+    showFitting();
+  }
 }
 
 function initRenderer() {
@@ -221,7 +228,7 @@ function resetCamera() {
   controls.enabled = view !== 'hand';
   controls.autoRotate = $('rotate').getAttribute('aria-pressed') === 'true' && view !== 'hand';
   $('rotate').disabled = view === 'hand';
-  if (view === 'player') { controls.target.set(0, 17, 0); camera.position.set(-35, 28, 64); }
+  if (view === 'player') { controls.target.set(0, 17, 0); camera.position.set(-35, 28, selected?.kind === 'ELYTRA' && loadout.CHESTPLATE === selected ? -64 : 64); }
   else if (view === 'item') {
     const bounds = new THREE.Box3().setFromObject(content);
     const size = bounds.getSize(new THREE.Vector3());
@@ -243,11 +250,22 @@ async function addArmor(avatar, entry) {
     parts.head.add(anchor);
     return;
   }
-  const layers = entry.equipment?.[entry.kind === 'LEGGINGS' ? 'humanoid_leggings' : 'humanoid'];
+  const layers = entry.equipment?.[equipmentLayer(entry.kind)];
   if (!layers?.length) throw new Error('Текстура надетой брони отсутствует');
   for (const layer of layers) {
     const tex = await library.texture(layer.texture);
     const add = (part, w, h, d, x, y, inflate, mirror = false) => parts[part].add(playerBox(w, h, d, x, y, tex, inflate, mirror));
+    if (entry.kind === 'ELYTRA') {
+      for (const side of [-1, 1]) {
+        const hinge = new THREE.Group();
+        hinge.position.set(side * 1.2, 6, -2.5);
+        hinge.rotation.set(Math.PI / 12, 0, side * Math.PI / 12);
+        const wing = playerBox(10, 20, 2, 22, 0, tex, 0, side < 0);
+        wing.position.set(side * 3.8, -10, -1);
+        hinge.add(wing);
+        parts.body.add(hinge);
+      }
+    }
     if (entry.kind === 'HELMET') {
       add('head', 8, 8, 8, 0, 0, 1);
       // Humanoid equipment may put crowns/masks in the hat UVs, not the base head.
@@ -273,8 +291,16 @@ async function heldItem(avatar, entry, hand) {
   // Minecraft's third-person item transform: rotate the item -90° around X and 180° around Y,
   // then use the grip near the bottom of the arm. Display coordinates are in model pixels.
   const grip = new THREE.Group(); grip.position.set(0, -4, 1);
-  grip.rotation.set(Math.PI / 2, Math.PI, 0);
   applyDisplay(object, `thirdperson_${hand}hand`);
+  if (object.userData.handle) {
+    const sign = hand === 'right' ? 1 : -1;
+    grip.rotation.set(.48, sign * .35, sign * .18);
+    // Keep the centre of the leather wrapping inside the palm after posing the blade.
+    object.rotation.set(0, 0, 0);
+    object.position.fromArray(object.userData.handle).multiply(object.scale).negate();
+  } else {
+    grip.rotation.set(Math.PI / 2, Math.PI, 0);
+  }
   grip.add(object); part.add(grip);
 }
 
@@ -362,7 +388,7 @@ function selectItem(item, equip = true, reframe = view === 'item') {
   $('selected-name').textContent = item.name;
   $('selected-kind').textContent = kinds[item.kind] || item.kind;
   $('selected-price').textContent = `${money(item.price)} космиков`;
-  const armor = armorKinds.includes(item.kind);
+  const armor = armorSlot(item.kind);
   const wearable = canWear(item);
   const members = packMembers(item.pack);
   const total = members.reduce((sum, i) => sum + i.price, 0);
@@ -374,7 +400,7 @@ function selectItem(item, equip = true, reframe = view === 'item') {
   $('equip-pack').disabled = !Object.values(packLoadout(item.pack)).some(Boolean);
   $('equip-pack').title = packDefaults(item.pack);
   if (equip && item.available) {
-    if (armor && wearable) loadout[item.kind] = item;
+    if (armor && wearable) loadout[armor] = item;
     else if (!armor) {
       loadout[$('hand').value] = item;
     }
@@ -388,7 +414,7 @@ function filteredItems() {
   const terms = query.split(/\s+/).filter(Boolean);
   const list = catalog.items.filter(item => {
     const haystack = normalize(`${item.name} ${packName(item)} ${kinds[item.kind]} ${item.nx_id}`);
-    const matchesSlot = !browsingSlot || (armorKinds.includes(browsingSlot) ? item.kind === browsingSlot && item.available && canWear(item) : !armorKinds.includes(item.kind) && item.available);
+    const matchesSlot = !browsingSlot || (item.available && (armorKinds.includes(browsingSlot) ? armorSlot(item.kind) === browsingSlot && canWear(item) : !armorSlot(item.kind)));
     return matchesSlot && (category === 'all' || category === 'packs' || categories[category]?.includes(item.kind)) && (!$('pack').value || item.pack === $('pack').value) && (!$('kind').value || item.kind === $('kind').value) && terms.every(term => haystack.includes(term));
   });
   const sort = $('sort').value;
@@ -463,6 +489,7 @@ async function packThumbnail(id) {
     const avatar = buildPlayer(await library.texture('default-skin.png'), false);
     try {
       await Promise.all(Object.entries(outfit).filter(([, item]) => item).map(async ([slot, item]) => armorKinds.includes(slot) ? addArmor(avatar, item) : heldItem(avatar, item, slot)));
+      if (outfit.CHESTPLATE?.kind === 'ELYTRA') avatar.rotation.y = Math.PI;
       return avatar;
     } catch (error) { releaseGeometry(avatar); throw error; }
   }
@@ -625,7 +652,7 @@ function bindControls() {
   $('equip-opened-pack').addEventListener('click', () => equipPack(openedPack));
   $('back-packs').addEventListener('click', () => { showPackIndex(); app.querySelector('[data-category="packs"]').focus({ preventScroll: true }); });
   $('hand').addEventListener('change', () => {
-    if (selected?.available && !armorKinds.includes(selected.kind)) {
+    if (selected?.available && !armorSlot(selected.kind)) {
       for (const key of ['left', 'right']) if (loadout[key] === selected) loadout[key] = null;
       loadout[$('hand').value] = selected;
     }

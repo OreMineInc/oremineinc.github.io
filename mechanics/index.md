@@ -12,7 +12,7 @@ section: mechanics
 
 <div class="card-grid">
   <a class="doc-card" href="{{ '/mechanics/claims/' | relative_url }}">{% include news-icon.html model="ban" %}<strong>Приваты</strong><small>Защита базы и территории</small></a>
-  <a class="doc-card" href="{{ '/mechanics/pvp/' | relative_url }}">{% include news-icon.html model="comet" %}<strong>PvP и рейды</strong><small>Сражения и гриферство</small></a>
+  <a class="doc-card" href="{{ '/mechanics/pvp/' | relative_url }}">{% include news-icon.html model="comet" %}<strong>PvP</strong><small>Бои с игроками и дуэли</small></a>
   <a class="doc-card" href="{{ '/mechanics/events/' | relative_url }}">{% include news-icon.html model="critical" %}<strong>Ивенты</strong><small>Механики и расписание событий</small></a>
   <a class="doc-card" href="{{ '/mechanics/quests/' | relative_url }}">{% include news-icon.html model="question" %}<strong>Квесты</strong><small>Задания и специализации</small></a>
   <a class="doc-card" href="{{ '/mechanics/smuggler/' | relative_url }}">{% include news-icon.html model="shopping" %}<strong>Контрабандист</strong><small>Расписание и редкие товары</small></a>
