@@ -108,8 +108,8 @@ export class ModelLibrary {
     const group = new THREE.Group();
     group.userData.display = raw.display || {};
     group.userData.name = entry.nx_id;
-    // The forged swords define their grip explicitly in the mesh.
-    const handle = entry.kind === 'SWORD' && raw.elements?.find(element => element.name === 'Leather grip' && !element.rotation?.angle);
+    // Forged weapons and tools share the same named wrapping on their handles.
+    const handle = raw.elements?.find(element => element.name === 'Leather grip' && !element.rotation?.angle);
     if (handle) {
       const center = handle.from.map((value, i) => (value + handle.to[i]) / 2 - 8);
       group.userData.handle = [center[0], center[1], -center[2]];

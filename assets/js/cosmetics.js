@@ -288,16 +288,21 @@ async function addArmor(avatar, entry) {
 async function heldItem(avatar, entry, hand) {
   const object = await library.item(entry);
   const part = avatar.userData.parts[hand === 'right' ? 'rightArm' : 'leftArm'];
-  // Minecraft's third-person item transform: rotate the item -90° around X and 180° around Y,
-  // then use the grip near the bottom of the arm. Display coordinates are in model pixels.
   const grip = new THREE.Group(); grip.position.set(0, -4, 1);
   applyDisplay(object, `thirdperson_${hand}hand`);
-  if (object.userData.handle) {
+  if (categories.weapon.includes(entry.kind) || categories.tools.includes(entry.kind) || entry.kind === 'TRIDENT') {
     const sign = hand === 'right' ? 1 : -1;
-    grip.rotation.set(.48, sign * .35, sign * .18);
-    // Keep the centre of the leather wrapping inside the palm after posing the blade.
-    object.rotation.set(0, 0, 0);
-    object.position.fromArray(object.userData.handle).multiply(object.scale).negate();
+    // Pivot the occupied arm at the shoulder, keeping its skin and armor together.
+    part.position.y += 6;
+    part.rotateX(-Math.PI / 12);
+    part.translateY(-6);
+    // Lift the working end forward and slightly away from the torso.
+    grip.position.set(0, -4.5, 0);
+    grip.rotation.set(Math.PI / 3.5, sign * .22, sign * .46, 'ZXY');
+    grip.rotateY(Math.PI);
+    if (object.userData.handle) {
+      object.position.fromArray(object.userData.handle).multiply(object.scale).applyQuaternion(object.quaternion).negate();
+    }
   } else {
     grip.rotation.set(Math.PI / 2, Math.PI, 0);
   }
